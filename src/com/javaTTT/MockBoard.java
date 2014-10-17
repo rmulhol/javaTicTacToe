@@ -44,4 +44,9 @@ public class MockBoard extends Board {
         return true;
     }
 
+    @Override
+    boolean tieGame() {
+        return true;
+    }
+
 }

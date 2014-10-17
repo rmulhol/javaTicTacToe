@@ -1,5 +1,7 @@
 package com.javaTTT;
 
+import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
+
 /**
  * Created by robertmulholand on 10/16/14.
  */
@@ -36,5 +38,10 @@ public class DisplayImpl extends Display {
     @Override
     void announceWinForO() {
         System.out.println("Player O wins the game! Thanks for playing!");
+    }
+
+    @Override
+    void announceTieGame() {
+        System.out.println("Tie game! Thanks for playing!");
     }
 }

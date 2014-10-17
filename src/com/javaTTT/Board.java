@@ -19,4 +19,6 @@ abstract class Board {
 
     abstract boolean oWins();
 
+    abstract boolean tieGame();
+
 }

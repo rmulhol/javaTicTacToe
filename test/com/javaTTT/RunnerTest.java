@@ -6,6 +6,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class RunnerTest {
+
     private MockDisplay mockDisplay = new MockDisplay();
     private MockBoard mockBoard = new MockBoard();
     private MockPlayer mockPlayer1 = new MockPlayer();
@@ -50,8 +51,21 @@ public class RunnerTest {
     }
 
     @Test
+    public void testAnnounceTieGame() {
+        newGame.announceTieGame();
+        boolean tieGameAnnounced = mockDisplay.tieGameAnnounced;
+        assertEquals(true, tieGameAnnounced);
+    }
+
+    @Test
     public void testGetPlayer1Move() {
         String gotMove = newGame.getPlayer1Move();
+        assertEquals("Get move called", gotMove);
+    }
+
+    @Test
+    public void testGetPlayer2Move() {
+        String gotMove = newGame.getPlayer2Move();
         assertEquals("Get move called", gotMove);
     }
 
@@ -77,15 +91,21 @@ public class RunnerTest {
     }
 
     @Test
+    public void testXWins() {
+        boolean xWins = newGame.xWins();
+        assertEquals(true, xWins);
+    }
+
+    @Test
     public void testOWins() {
         boolean oWins = newGame.oWins();
         assertEquals(true, oWins);
     }
 
     @Test
-    public void testXWins() {
-        boolean xWins = newGame.xWins();
-        assertEquals(true, xWins);
+    public void testTieGame() {
+        boolean tieGame = newGame.tieGame();
+        assertEquals(true, tieGame);
     }
 
 }

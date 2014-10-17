@@ -1,5 +1,7 @@
 package com.javaTTT;
 
+import java.util.Arrays;
+
 /**
  * Created by robertmulholand on 10/16/14.
  */
@@ -37,7 +39,7 @@ public class BoardImpl extends Board {
     @Override
     boolean gameOver() {
         boolean gameOver = false;
-        if(xWins() || oWins()) {
+        if(xWins() || oWins() || tieGame()) {
             gameOver = true;
         }
         return gameOver;
@@ -85,6 +87,16 @@ public class BoardImpl extends Board {
             }
         }
         return winO;
+    }
+
+    public boolean tieGame() {
+        boolean tieGame = true;
+        for(int space : board) {
+            if(space == 0) {
+                tieGame = false;
+            }
+        };
+        return tieGame;
     }
 
     private int convertStringToIndex(String move) {

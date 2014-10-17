@@ -28,31 +28,32 @@ public class Runner {
         announceWinner();
     }
 
-    public void setPlayer1Move(int[] gameBoard) {
+    public void setPlayer1Move(int[] myBoard) {
         String move = getPlayer1Move();
         while(!spaceAvailable(move)) {
             announceSpaceTaken();
             move = getPlayer1Move();
         }
         setMove(move);
-        gameBoard = getBoard();
-        displayBoard(gameBoard);
+        myBoard = getBoard();
+        displayBoard(myBoard);
     }
 
-    public void setPlayer2Move(int[] gameBoard) {
+    public void setPlayer2Move(int[] myBoard) {
         String move = getPlayer2Move();
         while(!spaceAvailable(move)) {
             announceSpaceTaken();
             move = getPlayer2Move();
         }
         setMove(move);
-        gameBoard = getBoard();
-        displayBoard(gameBoard);
+        myBoard = getBoard();
+        displayBoard(myBoard);
     }
 
     public void announceWinner() {
         if(xWins()) announceWinForX();
         else if(oWins()) announceWinForO();
+        else if(tieGame()) announceTieGame();
     }
     public int[] getBoard() {
         return board.getBoard();
@@ -73,6 +74,8 @@ public class Runner {
     public void announceWinForO() {
         display.announceWinForO();
     }
+
+    public void announceTieGame() { display.announceTieGame(); }
 
     public String getPlayer1Move() {
         return player1.getMove();
@@ -101,4 +104,6 @@ public class Runner {
     public boolean oWins() {
         return board.oWins();
     }
+
+    public boolean tieGame() { return board.tieGame(); }
 }

@@ -6,9 +6,10 @@ package com.javaTTT;
 public class MockDisplay extends Display{
 
     boolean boardDisplayed = false;
+    boolean spaceTakenAnnounced = false;
     boolean xWinAnnounced = false;
     boolean oWinAnnounced = false;
-    boolean spaceTakenAnnounced = false;
+    boolean tieGameAnnounced = false;
 
     public boolean verifyBoardDisplayed() {
         return boardDisplayed;
@@ -44,6 +45,15 @@ public class MockDisplay extends Display{
 
     boolean verifyOWinAnnounced() {
         return oWinAnnounced;
+    }
+
+    @Override
+    void announceTieGame() {
+        tieGameAnnounced = true;
+    }
+
+    boolean verifyTieGameAnnounced() {
+        return tieGameAnnounced;
     }
 
 }

@@ -13,4 +13,6 @@ abstract class Display {
 
     abstract void announceWinForO();
 
+    abstract void announceTieGame();
+
 }
