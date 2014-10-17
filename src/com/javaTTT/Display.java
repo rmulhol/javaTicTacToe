@@ -5,6 +5,8 @@ package com.javaTTT;
  */
 abstract class Display {
 
+    abstract void introduceGame();
+
     abstract void displayBoard(int[] boardArray);
 
     abstract void announceSpaceTaken();

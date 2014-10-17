@@ -15,6 +15,13 @@ public class RunnerTest {
     private Runner newGame = new Runner(mockDisplay, mockBoard, mockPlayer1, mockPlayer2);
 
     @Test
+    public void testIntroduceGame() {
+        newGame.introduceGame();
+        boolean gameIntroduced = mockDisplay.verifyGameIntroduced();
+        assertEquals(true, gameIntroduced);
+    }
+
+    @Test
     public void testGetBoard() {
         int[] actualBoard = newGame.getBoard();
         int[] expectedBoard = new int[9];

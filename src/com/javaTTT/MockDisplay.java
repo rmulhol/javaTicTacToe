@@ -10,9 +10,19 @@ public class MockDisplay extends Display{
     boolean xWinAnnounced = false;
     boolean oWinAnnounced = false;
     boolean tieGameAnnounced = false;
+    boolean gameIntroduced = false;
 
     public boolean verifyBoardDisplayed() {
         return boardDisplayed;
+    }
+
+    @Override
+    void introduceGame() {
+        gameIntroduced = true;
+    }
+
+    public boolean verifyGameIntroduced() {
+        return gameIntroduced;
     }
 
     @Override

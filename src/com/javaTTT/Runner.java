@@ -18,6 +18,7 @@ public class Runner {
     }
 
     public void playGame() {
+        introduceGame();
         int[] gameBoard = getBoard();
         displayBoard(gameBoard);
         while(!gameOver()) {
@@ -55,6 +56,9 @@ public class Runner {
         else if(oWins()) announceWinForO();
         else if(tieGame()) announceTieGame();
     }
+
+    public void introduceGame() { display.introduceGame(); }
+
     public int[] getBoard() {
         return board.getBoard();
     }
