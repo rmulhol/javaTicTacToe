@@ -36,12 +36,12 @@ public class MockBoard extends Board {
 
     @Override
     boolean xWins() {
-        return false;
+        return true;
     }
 
     @Override
     boolean oWins() {
-        return false;
+        return true;
     }
 
 }

@@ -7,35 +7,53 @@ public class Runner {
 
     private Display display;
     private Board board;
-    private Player player;
+    private Player player1;
+    private Player player2;
 
-    Runner(Display display, Board board, Player player) {
+    Runner(Display display, Board board, Player player1, Player player2) {
         this.display = display;
         this.board = board;
-        this.player = player;
+        this.player1 = player1;
+        this.player2 = player2;
     }
 
     public void playGame() {
-        int[] newBoard = getBoard();
-        displayBoard(newBoard);
+        int[] gameBoard = getBoard();
+        displayBoard(gameBoard);
         while(!gameOver()) {
-            String move = getMove();
-            if(spaceAvailable(move)) {
-                setMove(move);
-                newBoard = getBoard();
-                displayBoard(newBoard);
-            } else {
-                System.out.println("Invalid input!");
-            }
+            setPlayer1Move(gameBoard);
+            if(gameOver()) { break; }
+            setPlayer2Move(gameBoard);
         }
-        if(board.xWins()) {
-            System.out.println("Player X wins the game!");
-        } else if(board.oWins()) {
-            System.out.println("Player O wins the game!");
-        }
-        System.out.println("Thanks for playing!");
+        announceWinner();
     }
 
+    public void setPlayer1Move(int[] gameBoard) {
+        String move = getPlayer1Move();
+        while(!spaceAvailable(move)) {
+            announceSpaceTaken();
+            move = getPlayer1Move();
+        }
+        setMove(move);
+        gameBoard = getBoard();
+        displayBoard(gameBoard);
+    }
+
+    public void setPlayer2Move(int[] gameBoard) {
+        String move = getPlayer2Move();
+        while(!spaceAvailable(move)) {
+            announceSpaceTaken();
+            move = getPlayer2Move();
+        }
+        setMove(move);
+        gameBoard = getBoard();
+        displayBoard(gameBoard);
+    }
+
+    public void announceWinner() {
+        if(xWins()) announceWinForX();
+        else if(oWins()) announceWinForO();
+    }
     public int[] getBoard() {
         return board.getBoard();
     }
@@ -44,8 +62,24 @@ public class Runner {
         display.displayBoard(boardArray);
     }
 
-    public String getMove() {
-        return player.getMove();
+    public void announceSpaceTaken() {
+        display.announceSpaceTaken();
+    }
+
+    public void announceWinForX() {
+        display.announceWinForX();
+    }
+
+    public void announceWinForO() {
+        display.announceWinForO();
+    }
+
+    public String getPlayer1Move() {
+        return player1.getMove();
+    }
+
+    public String getPlayer2Move() {
+        return player2.getMove();
     }
 
     public boolean spaceAvailable(String move) {
@@ -58,5 +92,13 @@ public class Runner {
 
     public boolean gameOver() {
         return board.gameOver();
+    }
+
+    public boolean xWins() {
+        return board.xWins();
+    }
+
+    public boolean oWins() {
+        return board.oWins();
     }
 }

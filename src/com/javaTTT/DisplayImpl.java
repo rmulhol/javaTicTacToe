@@ -23,4 +23,18 @@ public class DisplayImpl extends Display {
             }
         }
     }
+
+    public void announceSpaceTaken() {
+        System.out.println("That space is already taken! Please claim an open space.");
+    }
+
+    @Override
+    void announceWinForX() {
+        System.out.println("Player X wins the game! Thanks for playing!");
+    }
+
+    @Override
+    void announceWinForO() {
+        System.out.println("Player O wins the game! Thanks for playing!");
+    }
 }

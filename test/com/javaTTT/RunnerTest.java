@@ -8,9 +8,10 @@ import static org.junit.Assert.*;
 public class RunnerTest {
     private MockDisplay mockDisplay = new MockDisplay();
     private MockBoard mockBoard = new MockBoard();
-    private MockPlayer mockPlayer = new MockPlayer();
+    private MockPlayer mockPlayer1 = new MockPlayer();
+    private MockPlayer mockPlayer2 = new MockPlayer();
 
-    private Runner newGame = new Runner(mockDisplay, mockBoard, mockPlayer);
+    private Runner newGame = new Runner(mockDisplay, mockBoard, mockPlayer1, mockPlayer2);
 
     @Test
     public void testGetBoard() {
@@ -23,14 +24,42 @@ public class RunnerTest {
     public void testDisplayBoard() {
         int[] emptyBoard = new int[9];
         newGame.displayBoard(emptyBoard);
-        boolean boardDisplayed = mockDisplay.verifyDisplayBoard();
+        boolean boardDisplayed = mockDisplay.verifyBoardDisplayed();
         assertEquals(true, boardDisplayed);
     }
 
     @Test
-    public void testGetMove() {
-        String gotMove = newGame.getMove();
+    public void testAnnounceSpaceTaken() {
+        newGame.announceSpaceTaken();
+        boolean spaceTakenAnnounced = mockDisplay.verifySpaceTakenAnnounced();
+        assertEquals(true, spaceTakenAnnounced);
+    }
+
+    @Test
+    public void testAnnounceWinForX() {
+        newGame.announceWinForX();
+        boolean xWinAnnounced = mockDisplay.verifyXWinAnnounced();
+        assertEquals(true, xWinAnnounced);
+    }
+
+    @Test
+    public void testAnnounceWinForO() {
+        newGame.announceWinForO();
+        boolean oWinAnnounced = mockDisplay.verifyOWinAnnounced();
+        assertEquals(true, oWinAnnounced);
+    }
+
+    @Test
+    public void testGetPlayer1Move() {
+        String gotMove = newGame.getPlayer1Move();
         assertEquals("Get move called", gotMove);
+    }
+
+    @Test
+    public void testCheckSpaceAvailability() {
+        String move = "test move";
+        boolean spaceAvailabilityChecked = newGame.spaceAvailable(move);
+        assertEquals(true, spaceAvailabilityChecked);
     }
 
     @Test
@@ -42,16 +71,21 @@ public class RunnerTest {
     }
 
     @Test
-    public void testCheckSpaceAvailability() {
-        String move = "test move";
-        boolean spaceAvailabilityChecked = newGame.spaceAvailable(move);
-        assertEquals(true, spaceAvailabilityChecked);
-    }
-
-    @Test
     public void testGameOver() {
         boolean gameOver = newGame.gameOver();
         assertEquals(true, gameOver);
+    }
+
+    @Test
+    public void testOWins() {
+        boolean oWins = newGame.oWins();
+        assertEquals(true, oWins);
+    }
+
+    @Test
+    public void testXWins() {
+        boolean xWins = newGame.xWins();
+        assertEquals(true, xWins);
     }
 
 }

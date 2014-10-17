@@ -5,6 +5,12 @@ package com.javaTTT;
  */
 abstract class Display {
 
-    public abstract void displayBoard(int[] boardArray);
+    abstract void displayBoard(int[] boardArray);
+
+    abstract void announceSpaceTaken();
+
+    abstract void announceWinForX();
+
+    abstract void announceWinForO();
 
 }
