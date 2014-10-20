@@ -1,52 +1,96 @@
 package com.javaTTT;
 
-/**
- * Created by robertmulholand on 10/10/14.
- */
-public class MockBoard extends Board {
-    private boolean moveAdded = false;
+import java.util.HashMap;
 
-    public int[] createEmptyBoard() {
+public class MockBoard extends Board {
+
+    boolean getBoardCalled = false;
+    boolean setMoveCalled = false;
+    boolean tieGameCalled = false;
+    boolean spaceAvailableCalled = false;
+    boolean playerWinsCalled = false;
+
+    @Override
+    int calculateBoardLength() {
+        return 0;
+    }
+
+    @Override
+    HashMap createEmptyBoard() {
         return null;
     }
 
     @Override
-    public int[] getBoard() {
-        return new int[9];
+    HashMap getBoard() {
+        getBoardCalled = true;
+        return null;
     }
 
     @Override
-    void addPlayerMove(String move) {
-        moveAdded = true;
-    }
-
-    public boolean verifyMoveAdded() {
-        return moveAdded;
+    void setMove(int move, String player) {
+        setMoveCalled = true;
     }
 
     @Override
-    boolean gameOver() {
-        return true;
+    boolean spaceAvailable(int move) {
+        spaceAvailableCalled = true;
+        return false;
     }
 
     @Override
-    boolean checkSpaceAvailability(String move) {
-        return true;
+    int[][] rows() {
+        return new int[0][];
     }
 
     @Override
-    boolean xWins() {
-        return true;
+    int[][] columns() {
+        return new int[0][];
     }
 
     @Override
-    boolean oWins() {
-        return true;
+    int[][] leftToRightDiagonal() {
+        return new int[0][];
     }
 
     @Override
-    boolean tieGame() {
-        return true;
+    public int[][] rightToLeftDiagonal() {
+        return new int[0][];
     }
 
+    @Override
+    public int[][] winningCombinations() {
+        return new int[0][];
+    }
+
+    @Override
+    public boolean playerWins(String playerMove) {
+        playerWinsCalled = true;
+        return false;
+    }
+
+    @Override
+    public boolean tieGame() {
+        tieGameCalled = true;
+        return false;
+    }
+
+    boolean getBoardCalled() {
+        return getBoardCalled;
+    }
+
+    boolean setMoveCalled() {
+        return setMoveCalled;
+    }
+
+    boolean tieGameCalled() {
+        return tieGameCalled;
+    }
+
+    boolean spaceAvailableCalled() {
+        return spaceAvailableCalled;
+    }
+
+    boolean playerWinsCalled() {
+        return playerWinsCalled;
+    }
 }

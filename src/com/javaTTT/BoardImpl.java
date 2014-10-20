@@ -1,116 +1,145 @@
 package com.javaTTT;
 
-/**
- * Created by robertmulholand on 10/16/14.
- */
-public class BoardImpl extends Board {
-    private int[] board = createEmptyBoard();
-    private int counter = 0;
+import java.util.HashMap;
 
-    @Override
-    public int[] createEmptyBoard() {
-        int[] newBoard = new int[9];
-        for(int i=0; i<9; i++) {
-            newBoard[i] = 0;
-        }
-        return newBoard;
+public class BoardImpl extends Board {
+
+    int boardSize;
+    int boardLength;
+    HashMap board;
+
+    public BoardImpl(int size) {
+        boardSize = size;
+        boardLength = calculateBoardLength();
+        board = createEmptyBoard();
     }
 
     @Override
-    public int[] getBoard() {
+    int calculateBoardLength() {
+        return boardSize * boardSize;
+    }
+
+    @Override
+    HashMap createEmptyBoard() {
+        HashMap<Integer, String> myBoard = new HashMap<Integer, String>();
+        for(int i=0; i<boardLength; i++) {
+            myBoard.put(i, " ");
+        }
+        return myBoard;
+    }
+
+    @Override
+    HashMap getBoard() {
         return board;
     }
 
     @Override
-    public void addPlayerMove(String move) {
-        int moveIndex = convertStringToIndex(move);
-        counter++;
-        board[moveIndex] = counter;
+    void setMove(int move, String player) {
+        board.put(move, player);
     }
 
     @Override
-    boolean checkSpaceAvailability(String move) {
-        int moveIndex = convertStringToIndex(move);
-        return board[moveIndex] == 0;
+    boolean spaceAvailable(int move) {
+        return board.get(move) == " ";
     }
 
     @Override
-    boolean gameOver() {
+    int[][] rows() {
+        int[][] rows = new int[boardSize][boardSize];
+        int counter = 0;
+        for(int i=0; i<boardSize; i++) {
+            for(int j=0; j< boardSize; j++) {
+                rows[i][j] = counter++;
+            }
+        }
+        return rows;
+    }
+
+    @Override
+    int[][] columns() {
+        int[][] columns = new int[boardSize][boardSize];
+        int startingPosition = 0;
+        int increment = 0;
+        for(int i=0; i<boardSize; i++) {
+            for(int j=0; j<boardSize; j++) {
+                columns[i][j] = startingPosition + increment;
+                increment += boardSize;
+            }
+            increment = 0;
+            startingPosition += 1;
+        }
+        return columns;
+    }
+
+    @Override
+    int[][] leftToRightDiagonal() {
+        int[][] leftToRightDiagonal = new int[1][boardSize];
+        int counter = 0;
+        for(int i=0; i<boardSize; i++) {
+            leftToRightDiagonal[0][i] = counter;
+            counter += boardSize + 1;
+        }
+        return leftToRightDiagonal;
+    }
+
+    @Override
+    public int[][] rightToLeftDiagonal() {
+        int[][] rightToLeftDiagonal = new int[1][boardSize];
+        int counter = boardSize - 1;
+        for(int i=0; i<boardSize; i++) {
+            rightToLeftDiagonal[0][i] = counter;
+            counter += boardSize - 1;
+        }
+        return rightToLeftDiagonal;
+    }
+
+    @Override
+    public int[][] winningCombinations() {
+        int[][] rows = rows();
+        int[][] columns = columns();
+        int[][] leftToRightDiagonal = leftToRightDiagonal();
+        int[][] rightToLeftDiagonal = rightToLeftDiagonal();
+
+        int rowsAndColumnsLength = rows.length + columns.length;
+        int winningCombinationsLength = rowsAndColumnsLength + 2;
+
+        int[][] winningCombinations = new int[winningCombinationsLength][boardSize];
+
+        System.arraycopy(rows, 0, winningCombinations, 0, rows.length);
+        System.arraycopy(columns, 0, winningCombinations, rows.length, columns.length);
+        System.arraycopy(leftToRightDiagonal, 0, winningCombinations, rowsAndColumnsLength, 1);
+        System.arraycopy(rightToLeftDiagonal, 0, winningCombinations, rowsAndColumnsLength+1, 1);
+
+        return winningCombinations;
+    }
+
+    @Override
+    public boolean playerWins(String playerMove) {
+        int[][] winningCombinations = winningCombinations();
         boolean gameOver = false;
-        if(xWins() || oWins() || tieGame()) {
-            gameOver = true;
+        for(int[] combination : winningCombinations) {
+            int counter = 0;
+            for(int space : combination ){
+                if(board.get(space) == playerMove) {
+                    counter += 1;
+                }
+                if(counter == boardSize) {
+                    gameOver = true;
+                }
+            }
         }
         return gameOver;
     }
 
-    private boolean isX(int index) {
-        return board[index] != 0 && board[index] % 2 == 0;
-    }
-
-    private boolean isO(int index) {
-        return board[index] % 2 == 1;
-    }
-
-    public boolean xWins() {
-        boolean winX = false;
-        for(int[] combination : winningCombinations) {
-            int[] winningCombination = new int[3];
-            int xChecker = 0;
-            for(int index : combination) {
-                if(isX(index)) {
-                    winningCombination[xChecker] = 1;
-                }
-                xChecker++;
-            }
-            if(winningCombination[0] == 1 && winningCombination[1] == 1 && winningCombination[2] == 1) {
-                winX = true;
-            }
-        }
-        return winX;
-    }
-
-    public boolean oWins() {
-        boolean winO = false;
-        for(int[] combination : winningCombinations) {
-            int[] winningCombination = new int[3];
-            int oChecker = 0;
-            for(int index : combination) {
-                if(isO(index)) {
-                    winningCombination[oChecker] = 1;
-                }
-                oChecker++;
-            }
-            if(winningCombination[0] == 1 && winningCombination[1] == 1 && winningCombination[2] == 1) {
-                winO = true;
-            }
-        }
-        return winO;
-    }
-
+    @Override
     public boolean tieGame() {
-        boolean tieGame = true;
-        for(int space : board) {
-            if(space == 0) {
-                tieGame = false;
+        boolean gameOver = true;
+        for(int i=0; i<boardLength; i++) {
+            if(spaceAvailable(i)) {
+                gameOver = false;
             }
-        };
-        return tieGame;
+        }
+        return gameOver;
     }
-
-    private int convertStringToIndex(String move) {
-        return Integer.parseInt(move);
-    }
-
-    private int[][] winningCombinations = {
-            { 0, 1, 2 },
-            { 3, 4, 5 },
-            { 6, 7, 8 },
-            { 0, 3, 6 },
-            { 1, 4, 7 },
-            { 2, 5, 8 },
-            { 0, 4, 8 },
-            { 2, 4, 6 }
-    };
-
 
 }

@@ -1,13 +1,12 @@
 package com.javaTTT;
 
-/**
- * Created by robertmulholand on 10/15/14.
- */
+import java.util.HashMap;
+
 abstract class Display {
 
     abstract void introduceGame();
 
-    abstract void displayBoard(int[] boardArray);
+    abstract void displayBoard(HashMap boardArray);
 
     abstract void announceWinForX();
 

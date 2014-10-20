@@ -6,7 +6,7 @@ public class Main {
 	// write your code here
         Configuration chooseGameType = new Configuration();
         Display display = new DisplayImpl();
-        Board board = new BoardImpl();
+        Board board = new BoardImpl(3);
         Player player1 = new HumanPlayer();
         Player player2 = null;
 

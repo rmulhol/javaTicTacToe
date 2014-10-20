@@ -1,10 +1,7 @@
 package com.javaTTT;
 
-import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
+import java.util.HashMap;
 
-/**
- * Created by robertmulholand on 10/16/14.
- */
 public class DisplayImpl extends Display {
     @Override
     void introduceGame() {
@@ -27,15 +24,15 @@ public class DisplayImpl extends Display {
     }
 
     @Override
-    public void displayBoard(int[] boardArray) {
+    public void displayBoard(HashMap boardHashMap) {
         int counter = 0;
         System.out.println("|---|---|---|");
-        for(int space : boardArray) {
-            if (space == 0) {
+        for(int i=0; i<9; i++) {
+            if (boardHashMap.get(i) == " ") {
                 System.out.print("|   ");
-            } else if (space % 2 == 0) {
+            } else if (boardHashMap.get(i) == "X") {
                 System.out.print("| X ");
-            } else if (space % 2 == 1) {
+            } else if (boardHashMap.get(i) == "O") {
                 System.out.print("| O ");
             }
             counter++;
@@ -44,6 +41,7 @@ public class DisplayImpl extends Display {
                 System.out.println("|---|---|---|");
             }
         }
+        System.out.println();
     }
 
     @Override

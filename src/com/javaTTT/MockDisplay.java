@@ -1,8 +1,7 @@
 package com.javaTTT;
 
-/**
- * Created by robertmulholand on 10/10/14.
- */
+import java.util.HashMap;
+
 public class MockDisplay extends Display{
 
     boolean boardDisplayed = false;
@@ -26,7 +25,7 @@ public class MockDisplay extends Display{
     }
 
     @Override
-    public void displayBoard(int[] boardArray) {
+    public void displayBoard(HashMap boardArray) {
         boardDisplayed = true;
     }
 

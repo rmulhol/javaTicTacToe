@@ -1,9 +1,11 @@
 package com.javaTTT;
 
-import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import java.util.HashMap;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class RunnerTest {
 
@@ -18,43 +20,51 @@ public class RunnerTest {
     public void testIntroduceGame() {
         newGame.introduceGame();
         boolean gameIntroduced = mockDisplay.verifyGameIntroduced();
-        assertEquals(true, gameIntroduced);
+        assertTrue(gameIntroduced);
     }
 
     @Test
     public void testGetBoard() {
-        int[] actualBoard = newGame.getBoard();
-        int[] expectedBoard = new int[9];
-        Assert.assertArrayEquals(expectedBoard, actualBoard);
+        newGame.getBoard();
+        boolean gotBoard = mockBoard.getBoardCalled();
+        assertTrue(gotBoard);
     }
 
     @Test
     public void testDisplayBoard() {
-        int[] emptyBoard = new int[9];
+        HashMap emptyBoard = new HashMap();
         newGame.displayBoard(emptyBoard);
         boolean boardDisplayed = mockDisplay.verifyBoardDisplayed();
-        assertEquals(true, boardDisplayed);
+        assertTrue(boardDisplayed);
+    }
+
+    @Test
+    public void testSetMove() {
+        String move = "1";
+        newGame.setMove(move);
+        boolean setMoveCalled = mockBoard.setMoveCalled();
+        assertTrue(setMoveCalled);
     }
 
     @Test
     public void testAnnounceWinForX() {
         newGame.announceWinForX();
         boolean xWinAnnounced = mockDisplay.verifyXWinAnnounced();
-        assertEquals(true, xWinAnnounced);
+        assertTrue(xWinAnnounced);
     }
 
     @Test
     public void testAnnounceWinForO() {
         newGame.announceWinForO();
         boolean oWinAnnounced = mockDisplay.verifyOWinAnnounced();
-        assertEquals(true, oWinAnnounced);
+        assertTrue(oWinAnnounced);
     }
 
     @Test
     public void testAnnounceTieGame() {
         newGame.announceTieGame();
         boolean tieGameAnnounced = mockDisplay.tieGameAnnounced;
-        assertEquals(true, tieGameAnnounced);
+        assertTrue(tieGameAnnounced);
     }
 
     @Test
@@ -71,41 +81,31 @@ public class RunnerTest {
 
     @Test
     public void testCheckSpaceAvailability() {
-        String move = "test move";
-        boolean spaceAvailabilityChecked = newGame.spaceAvailable(move);
-        assertEquals(true, spaceAvailabilityChecked);
-    }
-
-    @Test
-    public void testSetMove() {
-        String move = "test move";
-        newGame.setMove(move);
-        boolean setMoveRan = mockBoard.verifyMoveAdded();
-        assertEquals(true, setMoveRan);
-    }
-
-    @Test
-    public void testGameOver() {
-        boolean gameOver = newGame.gameOver();
-        assertEquals(true, gameOver);
+        String move = "1";
+        newGame.spaceAvailable(move);
+        boolean spaceAvailabilityChecked = mockBoard.spaceAvailableCalled();
+        assertTrue(spaceAvailabilityChecked);
     }
 
     @Test
     public void testXWins() {
-        boolean xWins = newGame.xWins();
-        assertEquals(true, xWins);
+        newGame.xWins();
+        boolean playerWinsCalled = mockBoard.playerWinsCalled();
+        assertTrue(playerWinsCalled);
     }
 
     @Test
     public void testOWins() {
-        boolean oWins = newGame.oWins();
-        assertEquals(true, oWins);
+        newGame.oWins();
+        boolean playerWinsCalled = mockBoard.playerWinsCalled();
+        assertTrue(playerWinsCalled);
     }
 
     @Test
     public void testTieGame() {
-        boolean tieGame = newGame.tieGame();
-        assertEquals(true, tieGame);
+        newGame.tieGame();
+        boolean tieGameCalled = mockBoard.tieGameCalled();
+        assertTrue(tieGameCalled);
     }
 
 }
