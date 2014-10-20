@@ -18,7 +18,6 @@ public class Runner {
     }
 
     public void playGame() {
-        introduceGame();
         int[] gameBoard = getBoard();
         displayBoard(gameBoard);
         while(!gameOver()) {
@@ -32,7 +31,6 @@ public class Runner {
     public void setPlayer1Move(int[] myBoard) {
         String move = getPlayer1Move();
         while(!spaceAvailable(move)) {
-            announceSpaceTaken();
             move = getPlayer1Move();
         }
         setMove(move);
@@ -43,7 +41,6 @@ public class Runner {
     public void setPlayer2Move(int[] myBoard) {
         String move = getPlayer2Move();
         while(!spaceAvailable(move)) {
-            announceSpaceTaken();
             move = getPlayer2Move();
         }
         setMove(move);
@@ -65,10 +62,6 @@ public class Runner {
 
     public void displayBoard(int[] boardArray) {
         display.displayBoard(boardArray);
-    }
-
-    public void announceSpaceTaken() {
-        display.announceSpaceTaken();
     }
 
     public void announceWinForX() {

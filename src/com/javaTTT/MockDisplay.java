@@ -30,11 +30,6 @@ public class MockDisplay extends Display{
         boardDisplayed = true;
     }
 
-    @Override
-    void announceSpaceTaken() {
-        spaceTakenAnnounced = true;
-    }
-
     boolean verifySpaceTakenAnnounced() {
         return spaceTakenAnnounced;
     }

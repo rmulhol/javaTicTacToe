@@ -10,11 +10,7 @@ public class DisplayImpl extends Display {
     void introduceGame() {
         System.out.println("Hello, welcome to tic tac toe.");
         System.out.println();
-        System.out.println("This game is currently configured for human vs human play.");
-        System.out.println("For each turn, you will be shown the board and offered a chance to make your move.");
-        System.out.println("After you have moved, it's your opponent's turn. This alternation continues until the game is finished.");
-        System.out.println("You make your move by indicating the index of the space you want to claim.");
-        System.out.println("The spaces are indexed like so:");
+        System.out.println("For this game, the spaces are indexed as shown here:");
         System.out.println();
         System.out.println("|---|---|---|");
         System.out.println("| 0 | 1 | 2 |");
@@ -48,10 +44,6 @@ public class DisplayImpl extends Display {
                 System.out.println("|---|---|---|");
             }
         }
-    }
-
-    public void announceSpaceTaken() {
-        System.out.println("That space is already taken! Please claim an open space.");
     }
 
     @Override

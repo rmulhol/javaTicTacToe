@@ -37,13 +37,6 @@ public class RunnerTest {
     }
 
     @Test
-    public void testAnnounceSpaceTaken() {
-        newGame.announceSpaceTaken();
-        boolean spaceTakenAnnounced = mockDisplay.verifySpaceTakenAnnounced();
-        assertEquals(true, spaceTakenAnnounced);
-    }
-
-    @Test
     public void testAnnounceWinForX() {
         newGame.announceWinForX();
         boolean xWinAnnounced = mockDisplay.verifyXWinAnnounced();

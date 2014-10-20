@@ -9,8 +9,6 @@ abstract class Display {
 
     abstract void displayBoard(int[] boardArray);
 
-    abstract void announceSpaceTaken();
-
     abstract void announceWinForX();
 
     abstract void announceWinForO();

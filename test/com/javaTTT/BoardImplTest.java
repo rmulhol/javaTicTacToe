@@ -22,7 +22,7 @@ public class BoardImplTest {
     }
 
     @Test
-    public void testGetBoardReturnsABoard() {
+    public void testGetBoardReturnsBoard() {
         int[] myBoard = board.getBoard();
         int boardLength = myBoard.length;
         Assert.assertEquals(9, boardLength);
