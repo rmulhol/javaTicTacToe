@@ -211,7 +211,6 @@ public class BoardImplTest {
 
     @Test
     public void testRecognizesPlayerWin() {
-        testBoardSize3.createEmptyBoard();
         testBoardSize3.setMove(0, "X");
         testBoardSize3.setMove(1, "X");
         testBoardSize3.setMove(2, "X");
@@ -221,14 +220,12 @@ public class BoardImplTest {
 
     @Test
     public void testDoesNotFalselyAssignWin() {
-        testBoardSize3.createEmptyBoard();
         boolean gameOver = testBoardSize3.playerWins("X");
         assertFalse(gameOver);
     }
 
     @Test
     public void testRecognizesTieGame() {
-        testBoardSize3.createEmptyBoard();
         for(int i=0; i<9; i++) {
             testBoardSize3.setMove(i, "X");
         }
@@ -238,8 +235,31 @@ public class BoardImplTest {
 
     @Test
     public void testDoesNotFalselyAssignTieGame() {
-        testBoardSize3.createEmptyBoard();
         boolean gameOver = testBoardSize3.tieGame();
         assertFalse(gameOver);
+    }
+
+    @Test
+    public void testGameOverRecognizesPlayerWin() {
+        for(int i=0; i<9; i++) {
+            testBoardSize3.setMove(i, "X");
+        }
+        boolean gameOver = testBoardSize3.gameOver("X", "O");
+        assertTrue(gameOver);
+    }
+
+    @Test
+    public void testGameOverRecognizesTie() {
+        testBoardSize3.setMove(0, "X");
+        testBoardSize3.setMove(1, "O");
+        testBoardSize3.setMove(2, "X");
+        testBoardSize3.setMove(3, "X");
+        testBoardSize3.setMove(4, "O");
+        testBoardSize3.setMove(5, "O");
+        testBoardSize3.setMove(6, "0");
+        testBoardSize3.setMove(7, "X");
+        testBoardSize3.setMove(8, "X");
+        boolean gameOver = testBoardSize3.gameOver("X", "O");
+        assertTrue(gameOver);
     }
 }

@@ -142,4 +142,9 @@ public class BoardImpl extends Board {
         return gameOver;
     }
 
+    @Override
+    boolean gameOver(String player1Move, String player2move) {
+        return playerWins(player1Move) || playerWins(player2move) || tieGame();
+    }
+
 }

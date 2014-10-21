@@ -5,59 +5,34 @@ import java.util.HashMap;
 public class MockDisplay extends Display{
 
     boolean boardDisplayed = false;
-    boolean spaceTakenAnnounced = false;
-    boolean xWinAnnounced = false;
-    boolean oWinAnnounced = false;
+    boolean player1WinAnnounced = false;
+    boolean player2WinAnnounced = false;
     boolean tieGameAnnounced = false;
     boolean gameIntroduced = false;
 
-    public boolean verifyBoardDisplayed() {
-        return boardDisplayed;
-    }
+    @Override
+    void introduceGame() { gameIntroduced = true; }
 
     @Override
-    void introduceGame() {
-        gameIntroduced = true;
-    }
-
-    public boolean verifyGameIntroduced() {
-        return gameIntroduced;
-    }
+    public void displayBoard(HashMap boardArray) { boardDisplayed = true; }
 
     @Override
-    public void displayBoard(HashMap boardArray) {
-        boardDisplayed = true;
-    }
-
-    boolean verifySpaceTakenAnnounced() {
-        return spaceTakenAnnounced;
-    }
+    void announceWinForPlayer1(String player1Move) { player1WinAnnounced = true; }
 
     @Override
-    void announceWinForX() {
-        xWinAnnounced = true;
-    }
-
-    boolean verifyXWinAnnounced() {
-        return xWinAnnounced;
-    }
+    void announceWinForPlayer2(String player2Move) { player2WinAnnounced = true; }
 
     @Override
-    void announceWinForO() {
-        oWinAnnounced = true;
-    }
+    void announceTieGame() { tieGameAnnounced = true; }
 
-    boolean verifyOWinAnnounced() {
-        return oWinAnnounced;
-    }
+    public boolean verifyGameIntroduced() { return gameIntroduced; }
 
-    @Override
-    void announceTieGame() {
-        tieGameAnnounced = true;
-    }
+    boolean verifyBoardDisplayed() { return boardDisplayed; }
 
-    boolean verifyTieGameAnnounced() {
-        return tieGameAnnounced;
-    }
+    boolean player1WinAnnounced() { return player1WinAnnounced; }
+
+    boolean player2WinAnnounced() { return player2WinAnnounced; }
+
+    boolean tieGameAnnounced() { return tieGameAnnounced; }
 
 }

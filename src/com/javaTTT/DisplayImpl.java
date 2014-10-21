@@ -45,15 +45,15 @@ public class DisplayImpl extends Display {
     }
 
     @Override
-    void announceWinForX() {
+    void announceWinForPlayer1(String player1Move) {
         System.out.println();
-        System.out.println("Player X wins the game! Thanks for playing!");
+        System.out.println("Player " + player1Move + " wins the game! Thanks for playing!");
     }
 
     @Override
-    void announceWinForO() {
+    void announceWinForPlayer2(String player2Move) {
         System.out.println();
-        System.out.println("Player O wins the game! Thanks for playing!");
+        System.out.println("Player " + player2Move + " wins the game! Thanks for playing!");
     }
 
     @Override

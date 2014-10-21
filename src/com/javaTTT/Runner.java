@@ -9,6 +9,8 @@ public class Runner {
     private Player player1;
     private Player player2;
     private int counter = 0;
+    private String player1Move = "X";
+    private String player2Move = "O";
 
     Runner(Display display, Board board, Player player1, Player player2) {
         this.display = display;
@@ -48,63 +50,45 @@ public class Runner {
         displayBoard(myBoard);
     }
 
-    public boolean gameOver() {
-        return xWins() || oWins() || tieGame();
-    }
-
     public void introduceGame() { display.introduceGame(); }
 
-    public HashMap getBoard() {
-        return board.getBoard();
-    }
+    public HashMap getBoard() { return board.getBoard(); }
 
-    public void displayBoard(HashMap boardArray) {
-        display.displayBoard(boardArray);
-    }
+    public void displayBoard(HashMap boardArray) { display.displayBoard(boardArray); }
 
     public void setMove(String move) {
         int moveToPlace = Integer.parseInt(move);
         counter++;
-        if(counter % 2 == 1) board.setMove(moveToPlace, "X");
-        else board.setMove(moveToPlace, "O");
+        if(counter % 2 == 1) board.setMove(moveToPlace, player1Move);
+        else board.setMove(moveToPlace, player2Move);
     }
 
     public void announceWinner() {
-        if(xWins()) announceWinForX();
-        else if(oWins()) announceWinForO();
+        if(player1Wins()) announceWinForPlayer1();
+        else if(player2Wins()) announceWinForPlayer2();
         else if(tieGame()) announceTieGame();
     }
 
-    public void announceWinForX() {
-        display.announceWinForX();
-    }
+    public void announceWinForPlayer1() { display.announceWinForPlayer1(player1Move); }
 
-    public void announceWinForO() {
-        display.announceWinForO();
-    }
+    public void announceWinForPlayer2() { display.announceWinForPlayer2(player2Move); }
 
     public void announceTieGame() { display.announceTieGame(); }
 
-    public String getPlayer1Move() {
-        return player1.getMove();
-    }
+    public String getPlayer1Move() { return player1.getMove(); }
 
-    public String getPlayer2Move() {
-        return player2.getMove();
-    }
+    public String getPlayer2Move() { return player2.getMove(); }
 
     public boolean spaceAvailable(String move) {
         int moveToPlace = Integer.parseInt(move);
         return board.spaceAvailable(moveToPlace);
     }
 
-    public boolean xWins() {
-        return board.playerWins("X");
-    }
+    public boolean player1Wins() { return board.playerWins(player1Move); }
 
-    public boolean oWins() {
-        return board.playerWins("O");
-    }
+    public boolean player2Wins() { return board.playerWins(player2Move); }
 
     public boolean tieGame() { return board.tieGame(); }
+
+    public boolean gameOver() { return board.gameOver(player1Move, player2Move); }
 }

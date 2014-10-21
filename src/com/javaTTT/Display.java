@@ -8,9 +8,9 @@ abstract class Display {
 
     abstract void displayBoard(HashMap boardArray);
 
-    abstract void announceWinForX();
+    abstract void announceWinForPlayer1(String player1Move);
 
-    abstract void announceWinForO();
+    abstract void announceWinForPlayer2(String player2Move);
 
     abstract void announceTieGame();
 

@@ -15,4 +15,5 @@ abstract class Board {
     abstract int[][] winningCombinations();
     abstract boolean playerWins(String playerMove);
     abstract boolean tieGame();
+    abstract boolean gameOver(String player1Move, String player2Move);
 }

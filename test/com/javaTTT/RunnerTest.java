@@ -48,22 +48,22 @@ public class RunnerTest {
 
     @Test
     public void testAnnounceWinForX() {
-        newGame.announceWinForX();
-        boolean xWinAnnounced = mockDisplay.verifyXWinAnnounced();
-        assertTrue(xWinAnnounced);
+        newGame.announceWinForPlayer1();
+        boolean player1WinAnnounced = mockDisplay.player1WinAnnounced();
+        assertTrue(player1WinAnnounced);
     }
 
     @Test
     public void testAnnounceWinForO() {
-        newGame.announceWinForO();
-        boolean oWinAnnounced = mockDisplay.verifyOWinAnnounced();
-        assertTrue(oWinAnnounced);
+        newGame.announceWinForPlayer2();
+        boolean player2WinAnnounced = mockDisplay.player2WinAnnounced();
+        assertTrue(player2WinAnnounced);
     }
 
     @Test
     public void testAnnounceTieGame() {
         newGame.announceTieGame();
-        boolean tieGameAnnounced = mockDisplay.tieGameAnnounced;
+        boolean tieGameAnnounced = mockDisplay.tieGameAnnounced();
         assertTrue(tieGameAnnounced);
     }
 
@@ -89,14 +89,14 @@ public class RunnerTest {
 
     @Test
     public void testXWins() {
-        newGame.xWins();
+        newGame.player1Wins();
         boolean playerWinsCalled = mockBoard.playerWinsCalled();
         assertTrue(playerWinsCalled);
     }
 
     @Test
     public void testOWins() {
-        newGame.oWins();
+        newGame.player2Wins();
         boolean playerWinsCalled = mockBoard.playerWinsCalled();
         assertTrue(playerWinsCalled);
     }
@@ -106,6 +106,13 @@ public class RunnerTest {
         newGame.tieGame();
         boolean tieGameCalled = mockBoard.tieGameCalled();
         assertTrue(tieGameCalled);
+    }
+
+    @Test
+    public void testGameOver() {
+        newGame.gameOver();
+        boolean gameOverCalled = mockBoard.gameOverCalled();
+        assertTrue(gameOverCalled);
     }
 
 }

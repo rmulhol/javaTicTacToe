@@ -9,16 +9,13 @@ public class MockBoard extends Board {
     boolean tieGameCalled = false;
     boolean spaceAvailableCalled = false;
     boolean playerWinsCalled = false;
+    boolean gameOverCalled = false;
 
     @Override
-    int calculateBoardLength() {
-        return 0;
-    }
+    int calculateBoardLength() { return 0; }
 
     @Override
-    HashMap createEmptyBoard() {
-        return null;
-    }
+    HashMap createEmptyBoard() { return null; }
 
     @Override
     HashMap getBoard() {
@@ -27,9 +24,7 @@ public class MockBoard extends Board {
     }
 
     @Override
-    void setMove(int move, String player) {
-        setMoveCalled = true;
-    }
+    void setMove(int move, String player) { setMoveCalled = true; }
 
     @Override
     boolean spaceAvailable(int move) {
@@ -38,29 +33,19 @@ public class MockBoard extends Board {
     }
 
     @Override
-    int[][] rows() {
-        return new int[0][];
-    }
+    int[][] rows() { return new int[0][]; }
 
     @Override
-    int[][] columns() {
-        return new int[0][];
-    }
+    int[][] columns() { return new int[0][]; }
 
     @Override
-    int[][] leftToRightDiagonal() {
-        return new int[0][];
-    }
+    int[][] leftToRightDiagonal() { return new int[0][]; }
 
     @Override
-    public int[][] rightToLeftDiagonal() {
-        return new int[0][];
-    }
+    public int[][] rightToLeftDiagonal() { return new int[0][]; }
 
     @Override
-    public int[][] winningCombinations() {
-        return new int[0][];
-    }
+    public int[][] winningCombinations() { return new int[0][]; }
 
     @Override
     public boolean playerWins(String playerMove) {
@@ -74,23 +59,22 @@ public class MockBoard extends Board {
         return false;
     }
 
-    boolean getBoardCalled() {
-        return getBoardCalled;
+    @Override
+    boolean gameOver(String player1Move, String player2Move) {
+        gameOverCalled = true;
+        return false;
     }
 
-    boolean setMoveCalled() {
-        return setMoveCalled;
-    }
+    boolean getBoardCalled() { return getBoardCalled; }
 
-    boolean tieGameCalled() {
-        return tieGameCalled;
-    }
+    boolean setMoveCalled() { return setMoveCalled; }
 
-    boolean spaceAvailableCalled() {
-        return spaceAvailableCalled;
-    }
+    boolean tieGameCalled() { return tieGameCalled; }
 
-    boolean playerWinsCalled() {
-        return playerWinsCalled;
-    }
+    boolean spaceAvailableCalled() { return spaceAvailableCalled; }
+
+    boolean playerWinsCalled() { return playerWinsCalled; }
+
+    boolean gameOverCalled() { return gameOverCalled; }
+
 }
