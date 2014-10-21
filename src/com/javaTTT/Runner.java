@@ -31,7 +31,7 @@ public class Runner {
     }
 
     public void setPlayer1Move() {
-        String move = getPlayer1Move();
+        int move = getPlayer1Move();
         while(!spaceAvailable(move)) {
             move = getPlayer1Move();
         }
@@ -41,7 +41,7 @@ public class Runner {
     }
 
     public void setPlayer2Move() {
-        String move = getPlayer2Move();
+        int move = getPlayer2Move();
         while(!spaceAvailable(move)) {
             move = getPlayer2Move();
         }
@@ -56,11 +56,10 @@ public class Runner {
 
     public void displayBoard(HashMap boardArray) { display.displayBoard(boardArray); }
 
-    public void setMove(String move) {
-        int moveToPlace = Integer.parseInt(move);
+    public void setMove(int move) {
         counter++;
-        if(counter % 2 == 1) board.setMove(moveToPlace, player1Move);
-        else board.setMove(moveToPlace, player2Move);
+        if(counter % 2 == 1) board.setMove(move, player1Move);
+        else board.setMove(move, player2Move);
     }
 
     public void announceWinner() {
@@ -75,14 +74,11 @@ public class Runner {
 
     public void announceTieGame() { display.announceTieGame(); }
 
-    public String getPlayer1Move() { return player1.getMove(); }
+    public int getPlayer1Move() { return player1.getMove(); }
 
-    public String getPlayer2Move() { return player2.getMove(); }
+    public int getPlayer2Move() { return player2.getMove(); }
 
-    public boolean spaceAvailable(String move) {
-        int moveToPlace = Integer.parseInt(move);
-        return board.spaceAvailable(moveToPlace);
-    }
+    public boolean spaceAvailable(int move) { return board.spaceAvailable(move); }
 
     public boolean player1Wins() { return board.playerWins(player1Move); }
 

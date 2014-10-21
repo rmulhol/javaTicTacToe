@@ -1,14 +1,15 @@
 package com.javaTTT;
 
-/**
- * Created by robertmulholand on 10/16/14.
- */
 public class MockPlayer extends Player {
 
+    boolean getMoveCalled = false;
+
     @Override
-    public String getMove() {
-        String verification = "Get move called";
-        return verification;
+    public int getMove() {
+        getMoveCalled = true;
+        return 0;
     }
+
+    boolean getMoveCalled() { return getMoveCalled; }
 
 }

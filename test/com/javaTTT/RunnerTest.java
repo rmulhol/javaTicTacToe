@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import java.util.HashMap;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class RunnerTest {
@@ -40,8 +39,7 @@ public class RunnerTest {
 
     @Test
     public void testSetMove() {
-        String move = "1";
-        newGame.setMove(move);
+        newGame.setMove(1);
         boolean setMoveCalled = mockBoard.setMoveCalled();
         assertTrue(setMoveCalled);
     }
@@ -69,20 +67,21 @@ public class RunnerTest {
 
     @Test
     public void testGetPlayer1Move() {
-        String gotMove = newGame.getPlayer1Move();
-        assertEquals("Get move called", gotMove);
+        newGame.getPlayer1Move();
+        boolean getMoveCalled = mockPlayer1.getMoveCalled();
+        assertTrue(getMoveCalled);
     }
 
     @Test
     public void testGetPlayer2Move() {
-        String gotMove = newGame.getPlayer2Move();
-        assertEquals("Get move called", gotMove);
+        newGame.getPlayer2Move();
+        boolean getMoveCalled = mockPlayer2.getMoveCalled();
+        assertTrue(getMoveCalled);
     }
 
     @Test
     public void testCheckSpaceAvailability() {
-        String move = "1";
-        newGame.spaceAvailable(move);
+        newGame.spaceAvailable(1);
         boolean spaceAvailabilityChecked = mockBoard.spaceAvailableCalled();
         assertTrue(spaceAvailabilityChecked);
     }
