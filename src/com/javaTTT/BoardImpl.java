@@ -4,10 +4,6 @@ import java.util.HashMap;
 
 public class BoardImpl extends Board {
 
-    int boardSize;
-    int boardLength;
-    HashMap board;
-
     public BoardImpl(int size) {
         boardSize = size;
         boardLength = calculateBoardLength();
@@ -114,7 +110,7 @@ public class BoardImpl extends Board {
     }
 
     @Override
-    public boolean playerWins(String playerMove) {
+    public boolean playerWins(HashMap board, String playerMove) {
         int[][] winningCombinations = winningCombinations();
         boolean gameOver = false;
         for(int[] combination : winningCombinations) {
@@ -144,7 +140,7 @@ public class BoardImpl extends Board {
 
     @Override
     boolean gameOver(String player1Move, String player2move) {
-        return playerWins(player1Move) || playerWins(player2move) || tieGame();
+        return playerWins(board, player1Move) || playerWins(board, player2move) || tieGame();
     }
 
 }

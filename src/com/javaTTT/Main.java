@@ -11,22 +11,25 @@ public class Main {
         Player player2;
 
         display.introduceGame();
-        int gameType = chooseGameType.chooseGameType();
+        String gameType = chooseGameType.chooseGameType();
 
-        if(gameType == 0) {
+        if(!gameType.equals("0") && !gameType.equals("1") && !gameType.equals("2")) {
+            System.out.println("Sorry, this game is only configured for HvH or HvC play.");
+            System.out.println("You must enter 0, 1, or 2 to select one of those options.");
+            System.out.println("Since you did not, this game will now close. Goodbye.");
+        } else if(gameType.equals("2")) {
+            player2 = new SmartAiPlayer(board);
+            Runner newGame = new Runner(display, board, player1, player2);
+            newGame.playGame();
+        } else if(gameType.equals("1")) {
+            player2 = new DumbAiPlayer(board);
+            Runner newGame = new Runner(display, board, player1, player2);
+            newGame.playGame();
+        } else if(gameType.equals("0")) {
             player2 = new HumanPlayer();
             Runner newGame = new Runner(display, board, player1, player2);
             newGame.playGame();
-        } else if(gameType == 1) {
-            player2 = new DumbAiPlayer();
-            Runner newGame = new Runner(display, board, player1, player2);
-            newGame.playGame();
-        } else {
-            System.out.println("Sorry, this game is only configured for HvH or HvC play.");
-            System.out.println("You must enter 0 or 1 to select one of those options.");
-            System.out.println("Since you did not, this game will now close. Goodbye.");
         }
-
 
 
     }

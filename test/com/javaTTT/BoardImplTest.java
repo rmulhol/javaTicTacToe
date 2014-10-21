@@ -214,13 +214,13 @@ public class BoardImplTest {
         testBoardSize3.setMove(0, "X");
         testBoardSize3.setMove(1, "X");
         testBoardSize3.setMove(2, "X");
-        boolean gameOver = testBoardSize3.playerWins("X");
+        boolean gameOver = testBoardSize3.playerWins(testBoardSize3.board, "X");
         assertTrue(gameOver);
     }
 
     @Test
     public void testDoesNotFalselyAssignWin() {
-        boolean gameOver = testBoardSize3.playerWins("X");
+        boolean gameOver = testBoardSize3.playerWins(testBoardSize3.board, "X");
         assertFalse(gameOver);
     }
 

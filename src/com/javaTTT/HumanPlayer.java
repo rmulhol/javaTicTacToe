@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 
 public class HumanPlayer extends Player {
     @Override
-    public int getMove() {
+    public int getMove(String player1Move, String player2Move) {
         System.out.println("Enter your move: ");
         String move = null;
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

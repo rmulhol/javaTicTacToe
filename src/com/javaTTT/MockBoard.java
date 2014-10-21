@@ -48,7 +48,7 @@ public class MockBoard extends Board {
     public int[][] winningCombinations() { return new int[0][]; }
 
     @Override
-    public boolean playerWins(String playerMove) {
+    public boolean playerWins(HashMap board, String playerMove) {
         playerWinsCalled = true;
         return false;
     }

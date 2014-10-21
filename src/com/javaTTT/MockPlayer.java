@@ -5,7 +5,7 @@ public class MockPlayer extends Player {
     boolean getMoveCalled = false;
 
     @Override
-    public int getMove() {
+    public int getMove(String player1Move, String player2Move) {
         getMoveCalled = true;
         return 0;
     }

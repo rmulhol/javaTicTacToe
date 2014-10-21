@@ -74,15 +74,15 @@ public class Runner {
 
     public void announceTieGame() { display.announceTieGame(); }
 
-    public int getPlayer1Move() { return player1.getMove(); }
+    public int getPlayer1Move() { return player1.getMove(player1Move, player2Move); }
 
-    public int getPlayer2Move() { return player2.getMove(); }
+    public int getPlayer2Move() { return player2.getMove(player1Move, player2Move); }
 
     public boolean spaceAvailable(int move) { return board.spaceAvailable(move); }
 
-    public boolean player1Wins() { return board.playerWins(player1Move); }
+    public boolean player1Wins() { return board.playerWins(board.board, player1Move); }
 
-    public boolean player2Wins() { return board.playerWins(player2Move); }
+    public boolean player2Wins() { return board.playerWins(board.board, player2Move); }
 
     public boolean tieGame() { return board.tieGame(); }
 
