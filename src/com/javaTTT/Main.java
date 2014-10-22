@@ -5,8 +5,8 @@ public class Main {
     public static void main(String[] args) {
 	// write your code here
         Configuration chooseGameType = new Configuration();
-        Display display = new DisplayImpl();
         Board board = new BoardImpl(3);
+        Display display = new DisplayImpl(board);
         Player player1 = new HumanPlayer();
         Player player2;
 

@@ -3,62 +3,89 @@ package com.javaTTT;
 import java.util.HashMap;
 
 public class DisplayImpl extends Display {
+    Board board;
+    int boardLength;
+    int boardSize;
+
+    DisplayImpl(Board board) {
+        this.board = board;
+        this.boardLength = board.boardLength;
+        this.boardSize = board.boardSize;
+    }
+
     @Override
     void introduceGame() {
-        System.out.println("Hello, welcome to tic tac toe.");
-        System.out.println();
-        System.out.println("For this game, the spaces are indexed as shown here:");
-        System.out.println();
-        System.out.println("|---|---|---|");
-        System.out.println("| 0 | 1 | 2 |");
-        System.out.println("|---|---|---|");
-        System.out.println("| 3 | 4 | 5 |");
-        System.out.println("|---|---|---|");
-        System.out.println("| 6 | 7 | 8 |");
-        System.out.println("|---|---|---|");
-        System.out.println();
-        System.out.println("Please note that you can only choose an open space, and you must enter a valid integer to do so.");
-        System.out.println();
-        System.out.println("Let's get started!");
-        System.out.println();
+        printLine("Hello, welcome to tic tac toe.");
+        printLine("");
+        printLine("For this game, the spaces are indexed as shown here:");
+        printLine("");
+        printBoardIndexes();
+        printLine("");
+        printLine("Please note that you can only choose an open space, and you must enter a valid integer to do so.");
+        printLine("");
+        printLine("Let's get started!");
+        printLine("");
     }
 
     @Override
     public void displayBoard(HashMap boardHashMap) {
-        int counter = 0;
-        System.out.println("|---|---|---|");
-        for(int i=0; i<9; i++) {
-            if (boardHashMap.get(i) == " ") {
-                System.out.print("|   ");
-            } else if (boardHashMap.get(i) == "X") {
-                System.out.print("| X ");
-            } else if (boardHashMap.get(i) == "O") {
-                System.out.print("| O ");
-            }
-            counter++;
-            if (counter % 3 == 0) {
-                System.out.println("|");
-                System.out.println("|---|---|---|");
+        printBoardLine();
+        for(int i=0; i<boardLength; i++) {
+                printNoLine("|  " + boardHashMap.get(i) + " ");
+            if (i % boardSize == boardSize - 1) {
+                printLine("|");
+                printBoardLine();
             }
         }
-        System.out.println();
+        printLine("");
     }
 
     @Override
     void announceWinForPlayer1(String player1Move) {
-        System.out.println();
-        System.out.println("Player " + player1Move + " wins the game! Thanks for playing!");
+        printLine("");
+        printLine("Player " + player1Move + " wins the game! Thanks for playing!");
     }
 
     @Override
     void announceWinForPlayer2(String player2Move) {
-        System.out.println();
-        System.out.println("Player " + player2Move + " wins the game! Thanks for playing!");
+        printLine("");
+        printLine("Player " + player2Move + " wins the game! Thanks for playing!");
     }
 
     @Override
     void announceTieGame() {
-        System.out.println();
-        System.out.println("Tie game! Thanks for playing!");
+        printLine("");
+        printLine("Tie game! Thanks for playing!");
+    }
+
+    private void printBoardLine() {
+        for(int i=0; i<boardSize; i++) {
+            System.out.print("|----");
+        }
+        printLine("|");
+    }
+
+    private void printBoardIndexes() {
+        printBoardLine();
+        for(int i=0; i<boardLength; i++) {
+            if(i > 9) {
+                printNoLine("| " + i + " ");
+            } else {
+                printNoLine("|  " + i + " ");
+            }
+            if (i % boardSize == boardSize - 1) {
+                printLine("|");
+                printBoardLine();
+            }
+        }
+        printLine("");
+    }
+
+    private void printLine(String string) {
+        System.out.println(string);
+    }
+
+    private void printNoLine(String string) {
+        System.out.print(string);
     }
 }

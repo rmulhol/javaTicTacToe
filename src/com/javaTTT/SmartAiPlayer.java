@@ -12,6 +12,7 @@ public class SmartAiPlayer extends Player {
         boardLength = board.boardLength;
     }
 
+    // assumes ai is player2
     @Override
     int getMove(String player1Move, String player2Move) {
         for(int i=0; i<boardLength; i++) {
