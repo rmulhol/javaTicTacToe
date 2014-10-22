@@ -33,7 +33,7 @@ public class BoardImpl extends Board {
     }
 
     @Override
-    boolean spaceAvailable(int move) {
+    boolean spaceAvailable(HashMap board, int move) {
         return board.get(move) == " ";
     }
 
@@ -131,7 +131,7 @@ public class BoardImpl extends Board {
         int boardLength = findBoardLength(board);
         boolean gameOver = true;
         for(int i=0; i<boardLength; i++) {
-            if(spaceAvailable(i)) {
+            if(spaceAvailable(board, i)) {
                 gameOver = false;
             }
         }

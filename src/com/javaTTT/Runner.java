@@ -78,7 +78,7 @@ public class Runner {
 
     public int getPlayer2Move() { return player2.getMove(player1Move, player2Move); }
 
-    public boolean spaceAvailable(int move) { return board.spaceAvailable(move); }
+    public boolean spaceAvailable(int move) { return board.spaceAvailable(board.board, move); }
 
     public boolean player1Wins() { return board.playerWins(board.board, player1Move); }
 

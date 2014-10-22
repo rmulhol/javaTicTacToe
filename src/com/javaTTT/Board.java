@@ -10,7 +10,7 @@ abstract class Board {
     abstract HashMap createEmptyBoard(int boardLength);
     abstract HashMap getBoard();
     abstract void setMove(HashMap board, int move, String player);
-    abstract boolean spaceAvailable(int move);
+    abstract boolean spaceAvailable(HashMap board, int move);
     abstract int[][] rows(int boardSize);
     abstract int[][] columns(int boardSize);
     abstract int[][] leftToRightDiagonal(int boardSize);

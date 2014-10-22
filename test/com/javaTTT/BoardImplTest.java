@@ -73,7 +73,7 @@ public class BoardImplTest {
         testBoardSize3.createEmptyBoard(3);
         boolean allSpacesEmpty = true;
         for (int i = 0; i < 9; i++) {
-            if (!testBoardSize3.spaceAvailable(i)) {
+            if (!testBoardSize3.spaceAvailable(testBoardSize3.board, i)) {
                 allSpacesEmpty = false;
             }
         }
@@ -85,7 +85,7 @@ public class BoardImplTest {
         testBoardSize3.setMove(testBoardSize3.board, 1, "X");
         boolean allSpacesEmpty = true;
         for (int i = 0; i < 9; i++) {
-            if (!testBoardSize3.spaceAvailable(i)) {
+            if (!testBoardSize3.spaceAvailable(testBoardSize3.board, i)) {
                 allSpacesEmpty = false;
             }
         }
@@ -260,7 +260,7 @@ public class BoardImplTest {
         testBoardSize3.setMove(gameBoard, 6, "0");
         testBoardSize3.setMove(gameBoard, 7, "X");
         testBoardSize3.setMove(gameBoard, 8, "X");
-        boolean gameOver = testBoardSize3.gameOver(testBoardSize3.board, "X", "O");
+        boolean gameOver = testBoardSize3.gameOver(gameBoard, "X", "O");
         assertTrue(gameOver);
     }
 }

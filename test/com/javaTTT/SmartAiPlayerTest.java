@@ -24,12 +24,12 @@ public class SmartAiPlayerTest {
         testBoard.setMove(testBoard.board, 4, "O");
         int aiMove = smartAiPlayer.getMove("X", "O");
         testBoard.setMove(testBoard.board, aiMove, "O");
-        boolean otherSpacesOpen = testBoard.spaceAvailable(0) &&
-                testBoard.spaceAvailable(1) &&
-                testBoard.spaceAvailable(2) &&
-                testBoard.spaceAvailable(6) &&
-                testBoard.spaceAvailable(7) &&
-                testBoard.spaceAvailable(8);
+        boolean otherSpacesOpen = testBoard.spaceAvailable(testBoard.board, 0) &&
+                testBoard.spaceAvailable(testBoard.board, 1) &&
+                testBoard.spaceAvailable(testBoard.board, 2) &&
+                testBoard.spaceAvailable(testBoard.board, 6) &&
+                testBoard.spaceAvailable(testBoard.board, 7) &&
+                testBoard.spaceAvailable(testBoard.board, 8);
         assertTrue(otherSpacesOpen);
     }
 

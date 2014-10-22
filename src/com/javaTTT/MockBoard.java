@@ -27,7 +27,7 @@ public class MockBoard extends Board {
     void setMove(HashMap board, int move, String player) { setMoveCalled = true; }
 
     @Override
-    boolean spaceAvailable(int move) {
+    boolean spaceAvailable(HashMap board, int move) {
         spaceAvailableCalled = true;
         return false;
     }
