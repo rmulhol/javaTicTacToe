@@ -12,7 +12,19 @@ public class MockBoard extends Board {
     boolean gameOverCalled = false;
 
     @Override
-    int calculateBoardLength(int boardSize) { return 0; }
+    int calculateBoardLengthFromSideLength(int boardSize) {
+        return 0;
+    }
+
+    @Override
+    int calculateBoardSizeFromBoard(HashMap board) {
+        return 0;
+    }
+
+    @Override
+    int calculateBoardSideLengthFromBoard(HashMap board) {
+        return 0;
+    }
 
     @Override
     HashMap createEmptyBoard(int boardLength) { return null; }

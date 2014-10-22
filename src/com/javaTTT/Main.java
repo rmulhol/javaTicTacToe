@@ -1,12 +1,17 @@
 package com.javaTTT;
 
+import java.io.OutputStream;
+import java.io.PrintStream;
+
 public class Main {
 
     public static void main(String[] args) {
 
         Configuration chooseGameType = new Configuration();
         Board board = new BoardImpl(3);
-        Display display = new DisplayImpl(board);
+        OutputStream outputStream = new RealOutputStream();
+        PrintStream printStream = new RealPrintStream(outputStream);
+        Display display = new DisplayImpl(printStream, board);
         Player player1 = new HumanPlayer();
         Player player2;
 
@@ -14,9 +19,7 @@ public class Main {
         String gameType = chooseGameType.chooseGameType();
 
         if(!gameType.equals("0") && !gameType.equals("1") && !gameType.equals("2")) {
-            System.out.println("Sorry, this game is only configured for HvH or HvC play.");
-            System.out.println("You must enter 0, 1, or 2 to select one of those options.");
-            System.out.println("Since you did not, this game will now close. Goodbye.");
+            display.announceGameWillNotBegin();
         } else if(gameType.equals("2")) {
             player2 = new SmartAiPlayer(board);
             Runner newGame = new Runner(display, board, player1, player2);

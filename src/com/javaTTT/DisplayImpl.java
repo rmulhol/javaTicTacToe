@@ -1,16 +1,19 @@
 package com.javaTTT;
 
+import java.io.PrintStream;
 import java.util.HashMap;
 
 public class DisplayImpl extends Display {
     Board board;
     int boardLength;
-    int boardSize;
+    int boardSideLength;
+    PrintStream printStream;
 
-    DisplayImpl(Board board) {
+    DisplayImpl(PrintStream printStream, Board board) {
+        this.printStream = printStream;
         this.board = board;
         this.boardLength = board.boardLength;
-        this.boardSize = board.boardSize;
+        this.boardSideLength = board.boardSideLength;
     }
 
     @Override
@@ -27,12 +30,18 @@ public class DisplayImpl extends Display {
         printLine("");
     }
 
+    void announceGameWillNotBegin() {
+        printLine("Sorry, this game is only configured for HvH or HvC play.");
+        printLine("You must enter 0, 1, or 2 to select one of those options.");
+        printLine("Since you did not, this game will now close. Goodbye.");
+    }
+
     @Override
     public void displayBoard(HashMap boardHashMap) {
         printBoardLine();
         for(int i=0; i<boardLength; i++) {
                 printNoLine("|  " + boardHashMap.get(i) + " ");
-            if (i % boardSize == boardSize - 1) {
+            if (i % boardSideLength == boardSideLength - 1) {
                 printLine("|");
                 printBoardLine();
             }
@@ -59,7 +68,7 @@ public class DisplayImpl extends Display {
     }
 
     private void printBoardLine() {
-        for(int i=0; i<boardSize; i++) {
+        for(int i=0; i<boardSideLength; i++) {
             printNoLine("|----");
         }
         printLine("|");
@@ -73,7 +82,7 @@ public class DisplayImpl extends Display {
             } else {
                 printNoLine("|  " + i + " ");
             }
-            if (i % boardSize == boardSize - 1) {
+            if (i % boardSideLength == boardSideLength - 1) {
                 printLine("|");
                 printBoardLine();
             }
@@ -81,11 +90,7 @@ public class DisplayImpl extends Display {
         printLine("");
     }
 
-    private void printLine(String string) {
-        System.out.println(string);
-    }
+    public void printLine(String string) { printStream.println(string); }
 
-    private void printNoLine(String string) {
-        System.out.print(string);
-    }
+    public void printNoLine(String string) { printStream.print(string); }
 }

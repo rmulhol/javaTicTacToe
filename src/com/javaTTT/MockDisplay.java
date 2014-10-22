@@ -9,9 +9,15 @@ public class MockDisplay extends Display{
     boolean player2WinAnnounced = false;
     boolean tieGameAnnounced = false;
     boolean gameIntroduced = false;
+    boolean printLineWasCalled = false;
+    boolean printNoLineWasCalled = false;
+    boolean gameWillNotBeginAnnounced = false;
 
     @Override
     void introduceGame() { gameIntroduced = true; }
+
+    @Override
+    void announceGameWillNotBegin() { gameWillNotBeginAnnounced = true; }
 
     @Override
     public void displayBoard(HashMap boardArray) { boardDisplayed = true; }
@@ -24,6 +30,12 @@ public class MockDisplay extends Display{
 
     @Override
     void announceTieGame() { tieGameAnnounced = true; }
+
+    @Override
+    void printLine(String string) { printLineWasCalled = true; }
+
+    @Override
+    void printNoLine(String string) { printNoLineWasCalled = true; }
 
     public boolean verifyGameIntroduced() { return gameIntroduced; }
 

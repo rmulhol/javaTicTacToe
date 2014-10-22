@@ -67,20 +67,14 @@ public class SmartAiPlayer extends Player {
         return rand.nextInt(boardLength-1);
     }
 
-    private HashMap cloneBoard(HashMap board) {
-        return new HashMap<Object, Object>(board);
-    }
+    private HashMap cloneBoard(HashMap board) { return new HashMap<Object, Object>(board); }
 
-    private boolean spaceAvailable(HashMap board, int index) {
-        return boardObject.spaceAvailable(board, index);
-    }
+    private boolean spaceAvailable(HashMap board, int index) { return boardObject.spaceAvailable(board, index); }
 
     private boolean gameOver(HashMap board, String player1Move, String player2Move) {
         return boardObject.gameOver(board, player1Move, player2Move);
     }
 
-    private void setMove(HashMap board, int index, String playerMove) {
-        boardObject.setMove(board, index, playerMove);
-    }
+    private void setMove(HashMap board, int index, String playerMove) { boardObject.setMove(board, index, playerMove); }
 
 }

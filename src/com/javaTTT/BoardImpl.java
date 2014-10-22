@@ -7,13 +7,24 @@ import static java.lang.Math.sqrt;
 public class BoardImpl extends Board {
 
     public BoardImpl(int size) {
-        boardSize = size;
-        boardLength = calculateBoardLength(boardSize);
+        boardSideLength = size;
+        boardLength = calculateBoardLengthFromSideLength(boardSideLength);
         board = createEmptyBoard(boardLength);
     }
 
     @Override
-    int calculateBoardLength(int boardSize) { return boardSize * boardSize; }
+    int calculateBoardLengthFromSideLength(int boardSideLength) { return boardSideLength * boardSideLength; }
+
+    @Override
+    int calculateBoardSizeFromBoard(HashMap board) {
+        return board.size();
+    }
+
+    @Override
+    int calculateBoardSideLengthFromBoard(HashMap board) {
+        int boardLength = calculateBoardSizeFromBoard(board);
+        return (int) sqrt(boardLength);
+    }
 
     @Override
     HashMap createEmptyBoard(int boardLength) {
@@ -28,21 +39,14 @@ public class BoardImpl extends Board {
     HashMap getBoard() { return board; }
 
     @Override
-    void setMove(HashMap board, int move, String player) {
-        board.put(move, player);
-    }
+    void setMove(HashMap board, int move, String player) { board.put(move, player); }
 
     @Override
-    boolean spaceAvailable(HashMap board, int move) {
-        return board.get(move) == " ";
-    }
-
-    @Override
-    int[][] rows(int boardSize) {
-        int[][] rows = new int[boardSize][boardSize];
+    int[][] rows(int boardSideLength) {
+        int[][] rows = new int[boardSideLength][boardSideLength];
         int counter = 0;
-        for(int i=0; i<boardSize; i++) {
-            for(int j=0; j< boardSize; j++) {
+        for(int i=0; i<boardSideLength; i++) {
+            for(int j=0; j< boardSideLength; j++) {
                 rows[i][j] = counter++;
             }
         }
@@ -50,14 +54,14 @@ public class BoardImpl extends Board {
     }
 
     @Override
-    int[][] columns(int boardSize) {
-        int[][] columns = new int[boardSize][boardSize];
+    int[][] columns(int boardSideLength) {
+        int[][] columns = new int[boardSideLength][boardSideLength];
         int startingPosition = 0;
         int increment = 0;
-        for(int i=0; i<boardSize; i++) {
-            for(int j=0; j<boardSize; j++) {
+        for(int i=0; i<boardSideLength; i++) {
+            for(int j=0; j<boardSideLength; j++) {
                 columns[i][j] = startingPosition + increment;
-                increment += boardSize;
+                increment += boardSideLength;
             }
             increment = 0;
             startingPosition += 1;
@@ -66,38 +70,38 @@ public class BoardImpl extends Board {
     }
 
     @Override
-    int[][] leftToRightDiagonal(int boardSize) {
-        int[][] leftToRightDiagonal = new int[1][boardSize];
+    int[][] leftToRightDiagonal(int boardSideLength) {
+        int[][] leftToRightDiagonal = new int[1][boardSideLength];
         int counter = 0;
-        for(int i=0; i<boardSize; i++) {
+        for(int i=0; i<boardSideLength; i++) {
             leftToRightDiagonal[0][i] = counter;
-            counter += boardSize + 1;
+            counter += boardSideLength + 1;
         }
         return leftToRightDiagonal;
     }
 
     @Override
-    public int[][] rightToLeftDiagonal(int boardSize) {
-        int[][] rightToLeftDiagonal = new int[1][boardSize];
-        int counter = boardSize - 1;
-        for(int i=0; i<boardSize; i++) {
+    public int[][] rightToLeftDiagonal(int boardSideLength) {
+        int[][] rightToLeftDiagonal = new int[1][boardSideLength];
+        int counter = boardSideLength - 1;
+        for(int i=0; i<boardSideLength; i++) {
             rightToLeftDiagonal[0][i] = counter;
-            counter += boardSize - 1;
+            counter += boardSideLength - 1;
         }
         return rightToLeftDiagonal;
     }
 
     @Override
-    public int[][] winningCombinations(int boardSize) {
-        int[][] rows = rows(boardSize);
-        int[][] columns = columns(boardSize);
-        int[][] leftToRightDiagonal = leftToRightDiagonal(boardSize);
-        int[][] rightToLeftDiagonal = rightToLeftDiagonal(boardSize);
+    public int[][] winningCombinations(int boardSideLength) {
+        int[][] rows = rows(boardSideLength);
+        int[][] columns = columns(boardSideLength);
+        int[][] leftToRightDiagonal = leftToRightDiagonal(boardSideLength);
+        int[][] rightToLeftDiagonal = rightToLeftDiagonal(boardSideLength);
 
         int rowsAndColumnsLength = rows.length + columns.length;
         int winningCombinationsLength = rowsAndColumnsLength + 2;
 
-        int[][] winningCombinations = new int[winningCombinationsLength][boardSize];
+        int[][] winningCombinations = new int[winningCombinationsLength][boardSideLength];
 
         System.arraycopy(rows, 0, winningCombinations, 0, rows.length);
         System.arraycopy(columns, 0, winningCombinations, rows.length, columns.length);
@@ -108,9 +112,17 @@ public class BoardImpl extends Board {
     }
 
     @Override
+    boolean spaceAvailable(HashMap board, int move) { return board.get(move) == " "; }
+
+    @Override
+    boolean gameOver(HashMap board, String player1Move, String player2move) {
+        return playerWins(board, player1Move) || playerWins(board, player2move) || tieGame(board);
+    }
+
+    @Override
     public boolean playerWins(HashMap board, String playerMove) {
-        int boardSize = findBoardSize(board);
-        int[][] winningCombinations = winningCombinations(boardSize);
+        int boardSideLength = calculateBoardSideLengthFromBoard(board);
+        int[][] winningCombinations = winningCombinations(boardSideLength);
         boolean gameOver = false;
         for(int[] combination : winningCombinations) {
             int counter = 0;
@@ -118,7 +130,7 @@ public class BoardImpl extends Board {
                 if(board.get(space) == playerMove) {
                     counter += 1;
                 }
-                if(counter == boardSize) {
+                if(counter == boardSideLength) {
                     gameOver = true;
                 }
             }
@@ -128,7 +140,7 @@ public class BoardImpl extends Board {
 
     @Override
     public boolean tieGame(HashMap board) {
-        int boardLength = findBoardLength(board);
+        int boardLength = calculateBoardSizeFromBoard(board);
         boolean gameOver = true;
         for(int i=0; i<boardLength; i++) {
             if(spaceAvailable(board, i)) {
@@ -136,20 +148,6 @@ public class BoardImpl extends Board {
             }
         }
         return gameOver;
-    }
-
-    @Override
-    boolean gameOver(HashMap board, String player1Move, String player2move) {
-        return playerWins(board, player1Move) || playerWins(board, player2move) || tieGame(board);
-    }
-
-    public int findBoardLength(HashMap board) {
-        return board.size();
-    }
-
-    public int findBoardSize(HashMap board) {
-        int boardLength = findBoardLength(board);
-        return (int) sqrt(boardLength);
     }
 
 }
