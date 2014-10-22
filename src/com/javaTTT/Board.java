@@ -6,17 +6,17 @@ abstract class Board {
     int boardSize;
     int boardLength;
     HashMap board;
-    abstract int calculateBoardLength();
-    abstract HashMap createEmptyBoard();
+    abstract int calculateBoardLength(int boardSize);
+    abstract HashMap createEmptyBoard(int boardLength);
     abstract HashMap getBoard();
-    abstract void setMove(int move, String player);
+    abstract void setMove(HashMap board, int move, String player);
     abstract boolean spaceAvailable(int move);
-    abstract int[][] rows();
-    abstract int[][] columns();
-    abstract int[][] leftToRightDiagonal();
-    abstract int[][] rightToLeftDiagonal();
-    abstract int[][] winningCombinations();
+    abstract int[][] rows(int boardSize);
+    abstract int[][] columns(int boardSize);
+    abstract int[][] leftToRightDiagonal(int boardSize);
+    abstract int[][] rightToLeftDiagonal(int boardSize);
+    abstract int[][] winningCombinations(int boardSize);
     abstract boolean playerWins(HashMap board, String playerMove);
-    abstract boolean tieGame();
-    abstract boolean gameOver(String player1Move, String player2Move);
+    abstract boolean tieGame(HashMap board);
+    abstract boolean gameOver(HashMap board, String player1Move, String player2Move);
 }

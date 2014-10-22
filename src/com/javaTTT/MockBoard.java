@@ -12,10 +12,10 @@ public class MockBoard extends Board {
     boolean gameOverCalled = false;
 
     @Override
-    int calculateBoardLength() { return 0; }
+    int calculateBoardLength(int boardSize) { return 0; }
 
     @Override
-    HashMap createEmptyBoard() { return null; }
+    HashMap createEmptyBoard(int boardLength) { return null; }
 
     @Override
     HashMap getBoard() {
@@ -24,7 +24,7 @@ public class MockBoard extends Board {
     }
 
     @Override
-    void setMove(int move, String player) { setMoveCalled = true; }
+    void setMove(HashMap board, int move, String player) { setMoveCalled = true; }
 
     @Override
     boolean spaceAvailable(int move) {
@@ -33,19 +33,19 @@ public class MockBoard extends Board {
     }
 
     @Override
-    int[][] rows() { return new int[0][]; }
+    int[][] rows(int boardSize) { return new int[0][]; }
 
     @Override
-    int[][] columns() { return new int[0][]; }
+    int[][] columns(int boardSize) { return new int[0][]; }
 
     @Override
-    int[][] leftToRightDiagonal() { return new int[0][]; }
+    int[][] leftToRightDiagonal(int boardSize) { return new int[0][]; }
 
     @Override
-    public int[][] rightToLeftDiagonal() { return new int[0][]; }
+    public int[][] rightToLeftDiagonal(int boardSize) { return new int[0][]; }
 
     @Override
-    public int[][] winningCombinations() { return new int[0][]; }
+    public int[][] winningCombinations(int boardSize) { return new int[0][]; }
 
     @Override
     public boolean playerWins(HashMap board, String playerMove) {
@@ -54,13 +54,13 @@ public class MockBoard extends Board {
     }
 
     @Override
-    public boolean tieGame() {
+    public boolean tieGame(HashMap board) {
         tieGameCalled = true;
         return false;
     }
 
     @Override
-    boolean gameOver(String player1Move, String player2Move) {
+    boolean gameOver(HashMap board, String player1Move, String player2Move) {
         gameOverCalled = true;
         return false;
     }

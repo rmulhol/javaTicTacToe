@@ -3,7 +3,7 @@ package com.javaTTT;
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
+
         Configuration chooseGameType = new Configuration();
         Board board = new BoardImpl(3);
         Display display = new DisplayImpl(board);

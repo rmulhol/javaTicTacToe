@@ -12,18 +12,18 @@ public class SmartAiPlayerTest {
 
     @Test
     public void testAiClaimsWinner() {
-        testBoard.setMove(3, "O");
-        testBoard.setMove(4, "O");
+        testBoard.setMove(testBoard.board, 3, "O");
+        testBoard.setMove(testBoard.board, 4, "O");
         int winningMove = smartAiPlayer.getMove("X", "O");
         assertEquals(5, winningMove);
     }
 
     @Test
     public void testAiOnlyClaimsOneSpace() {
-        testBoard.setMove(3, "O");
-        testBoard.setMove(4, "O");
+        testBoard.setMove(testBoard.board, 3, "O");
+        testBoard.setMove(testBoard.board, 4, "O");
         int aiMove = smartAiPlayer.getMove("X", "O");
-        testBoard.setMove(aiMove, "O");
+        testBoard.setMove(testBoard.board, aiMove, "O");
         boolean otherSpacesOpen = testBoard.spaceAvailable(0) &&
                 testBoard.spaceAvailable(1) &&
                 testBoard.spaceAvailable(2) &&
@@ -35,8 +35,8 @@ public class SmartAiPlayerTest {
 
     @Test
     public void testAiBlocksLoser() {
-        testBoard.setMove(3, "X");
-        testBoard.setMove(4, "X");
+        testBoard.setMove(testBoard.board, 3, "X");
+        testBoard.setMove(testBoard.board, 4, "X");
         int blockingMove = smartAiPlayer.getMove("X", "O");
         assertEquals(5, blockingMove);
     }

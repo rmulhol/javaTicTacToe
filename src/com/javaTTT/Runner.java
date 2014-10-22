@@ -58,8 +58,8 @@ public class Runner {
 
     public void setMove(int move) {
         counter++;
-        if(counter % 2 == 1) board.setMove(move, player1Move);
-        else board.setMove(move, player2Move);
+        if(counter % 2 == 1) board.setMove(board.board, move, player1Move);
+        else board.setMove(board.board, move, player2Move);
     }
 
     public void announceWinner() {
@@ -84,7 +84,7 @@ public class Runner {
 
     public boolean player2Wins() { return board.playerWins(board.board, player2Move); }
 
-    public boolean tieGame() { return board.tieGame(); }
+    public boolean tieGame() { return board.tieGame(board.board); }
 
-    public boolean gameOver() { return board.gameOver(player1Move, player2Move); }
+    public boolean gameOver() { return board.gameOver(board.board, player1Move, player2Move); }
 }

@@ -60,7 +60,7 @@ public class DisplayImpl extends Display {
 
     private void printBoardLine() {
         for(int i=0; i<boardSize; i++) {
-            System.out.print("|----");
+            printNoLine("|----");
         }
         printLine("|");
     }

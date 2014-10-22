@@ -2,21 +2,21 @@ package com.javaTTT;
 
 import java.util.HashMap;
 
+import static java.lang.Math.sqrt;
+
 public class BoardImpl extends Board {
 
     public BoardImpl(int size) {
         boardSize = size;
-        boardLength = calculateBoardLength();
-        board = createEmptyBoard();
+        boardLength = calculateBoardLength(boardSize);
+        board = createEmptyBoard(boardLength);
     }
 
     @Override
-    int calculateBoardLength() {
-        return boardSize * boardSize;
-    }
+    int calculateBoardLength(int boardSize) { return boardSize * boardSize; }
 
     @Override
-    HashMap createEmptyBoard() {
+    HashMap createEmptyBoard(int boardLength) {
         HashMap<Integer, String> myBoard = new HashMap<Integer, String>();
         for(int i=0; i<boardLength; i++) {
             myBoard.put(i, " ");
@@ -25,12 +25,10 @@ public class BoardImpl extends Board {
     }
 
     @Override
-    HashMap getBoard() {
-        return board;
-    }
+    HashMap getBoard() { return board; }
 
     @Override
-    void setMove(int move, String player) {
+    void setMove(HashMap board, int move, String player) {
         board.put(move, player);
     }
 
@@ -40,7 +38,7 @@ public class BoardImpl extends Board {
     }
 
     @Override
-    int[][] rows() {
+    int[][] rows(int boardSize) {
         int[][] rows = new int[boardSize][boardSize];
         int counter = 0;
         for(int i=0; i<boardSize; i++) {
@@ -52,7 +50,7 @@ public class BoardImpl extends Board {
     }
 
     @Override
-    int[][] columns() {
+    int[][] columns(int boardSize) {
         int[][] columns = new int[boardSize][boardSize];
         int startingPosition = 0;
         int increment = 0;
@@ -68,7 +66,7 @@ public class BoardImpl extends Board {
     }
 
     @Override
-    int[][] leftToRightDiagonal() {
+    int[][] leftToRightDiagonal(int boardSize) {
         int[][] leftToRightDiagonal = new int[1][boardSize];
         int counter = 0;
         for(int i=0; i<boardSize; i++) {
@@ -79,7 +77,7 @@ public class BoardImpl extends Board {
     }
 
     @Override
-    public int[][] rightToLeftDiagonal() {
+    public int[][] rightToLeftDiagonal(int boardSize) {
         int[][] rightToLeftDiagonal = new int[1][boardSize];
         int counter = boardSize - 1;
         for(int i=0; i<boardSize; i++) {
@@ -90,11 +88,11 @@ public class BoardImpl extends Board {
     }
 
     @Override
-    public int[][] winningCombinations() {
-        int[][] rows = rows();
-        int[][] columns = columns();
-        int[][] leftToRightDiagonal = leftToRightDiagonal();
-        int[][] rightToLeftDiagonal = rightToLeftDiagonal();
+    public int[][] winningCombinations(int boardSize) {
+        int[][] rows = rows(boardSize);
+        int[][] columns = columns(boardSize);
+        int[][] leftToRightDiagonal = leftToRightDiagonal(boardSize);
+        int[][] rightToLeftDiagonal = rightToLeftDiagonal(boardSize);
 
         int rowsAndColumnsLength = rows.length + columns.length;
         int winningCombinationsLength = rowsAndColumnsLength + 2;
@@ -111,7 +109,8 @@ public class BoardImpl extends Board {
 
     @Override
     public boolean playerWins(HashMap board, String playerMove) {
-        int[][] winningCombinations = winningCombinations();
+        int boardSize = findBoardSize(board);
+        int[][] winningCombinations = winningCombinations(boardSize);
         boolean gameOver = false;
         for(int[] combination : winningCombinations) {
             int counter = 0;
@@ -128,7 +127,8 @@ public class BoardImpl extends Board {
     }
 
     @Override
-    public boolean tieGame() {
+    public boolean tieGame(HashMap board) {
+        int boardLength = findBoardLength(board);
         boolean gameOver = true;
         for(int i=0; i<boardLength; i++) {
             if(spaceAvailable(i)) {
@@ -139,8 +139,17 @@ public class BoardImpl extends Board {
     }
 
     @Override
-    boolean gameOver(String player1Move, String player2move) {
-        return playerWins(board, player1Move) || playerWins(board, player2move) || tieGame();
+    boolean gameOver(HashMap board, String player1Move, String player2move) {
+        return playerWins(board, player1Move) || playerWins(board, player2move) || tieGame(board);
+    }
+
+    public int findBoardLength(HashMap board) {
+        return board.size();
+    }
+
+    public int findBoardSize(HashMap board) {
+        int boardLength = findBoardLength(board);
+        return (int) sqrt(boardLength);
     }
 
 }
