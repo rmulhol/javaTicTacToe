@@ -21,6 +21,7 @@ public class Runner {
 
     public void playGame() {
         HashMap gameBoard = getBoard();
+
         displayBoard(gameBoard);
         while(!gameOver()) {
             setPlayer1Move();
@@ -54,7 +55,7 @@ public class Runner {
 
     public HashMap getBoard() { return board.getBoard(); }
 
-    public void displayBoard(HashMap boardArray) { display.displayBoard(boardArray); }
+    public void displayBoard(HashMap board) { display.displayBoard(board); }
 
     public void setMove(int move) {
         counter++;
@@ -63,14 +64,12 @@ public class Runner {
     }
 
     public void announceWinner() {
-        if(player1Wins()) announceWinForPlayer1();
-        else if(player2Wins()) announceWinForPlayer2();
+        if(player1Wins()) announceWinForPlayer(player1Move);
+        else if(player2Wins()) announceWinForPlayer(player2Move);
         else if(tieGame()) announceTieGame();
     }
 
-    public void announceWinForPlayer1() { display.announceWinForPlayer1(player1Move); }
-
-    public void announceWinForPlayer2() { display.announceWinForPlayer2(player2Move); }
+    public void announceWinForPlayer(String playerMove) { display.announceWinForPlayer(playerMove); }
 
     public void announceTieGame() { display.announceTieGame(); }
 

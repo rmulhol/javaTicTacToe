@@ -6,18 +6,14 @@ abstract class Display {
 
     abstract void introduceGame();
 
-    abstract void announceGameWillNotBegin();
+    abstract void displayBoardWithIndexes(int boardSize);
 
-    abstract void displayBoard(HashMap boardArray);
+    abstract void displayBoard(HashMap board);
 
-    abstract void announceWinForPlayer1(String player1Move);
-
-    abstract void announceWinForPlayer2(String player2Move);
+    abstract void announceWinForPlayer(String playerMove);
 
     abstract void announceTieGame();
 
-    abstract void printLine(String string);
 
-    abstract void printNoLine(String string);
 
 }

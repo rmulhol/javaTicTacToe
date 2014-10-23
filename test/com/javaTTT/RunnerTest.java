@@ -46,16 +46,9 @@ public class RunnerTest {
 
     @Test
     public void testAnnounceWinForX() {
-        newGame.announceWinForPlayer1();
-        boolean player1WinAnnounced = mockDisplay.player1WinAnnounced();
-        assertTrue(player1WinAnnounced);
-    }
-
-    @Test
-    public void testAnnounceWinForO() {
-        newGame.announceWinForPlayer2();
-        boolean player2WinAnnounced = mockDisplay.player2WinAnnounced();
-        assertTrue(player2WinAnnounced);
+        newGame.announceWinForPlayer("X");
+        boolean playerWinAnnounced = mockDisplay.playerWinAnnounced();
+        assertTrue(playerWinAnnounced);
     }
 
     @Test

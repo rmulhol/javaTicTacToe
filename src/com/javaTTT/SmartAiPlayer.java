@@ -40,11 +40,11 @@ public class SmartAiPlayer extends Player {
         return blockLoss(index, player1Move, player2Move) != -1;
     }
 
-    private int winningMove(int index, String player1Move, String player2Move) {
+    private int winningMove(int index, String otherPlayerMove, String thisAiPlayerMove) {
         HashMap testBoard = cloneBoard(boardObject.board);
         if(spaceAvailable(testBoard, index)) {
-            setMove(testBoard, index, player2Move);
-            if(gameOver(testBoard, player1Move, player2Move)) {
+            setMove(testBoard, index, thisAiPlayerMove);
+            if(gameOver(testBoard, otherPlayerMove, thisAiPlayerMove)) {
                 return index;
             }
         }
