@@ -5,23 +5,22 @@ import java.util.Random;
 
 public class SmartAiPlayer extends Player {
     Board boardObject;
-    int boardLength;
+    int boardSize;
     int middleSpace;
 
     SmartAiPlayer(Board boardObject) {
         this.boardObject = boardObject;
-        boardLength = boardObject.boardLength;
-        middleSpace = boardLength/2;
+        boardSize = boardObject.boardSize;
+        middleSpace = boardSize/2;
     }
 
-    // assumes ai is player2
     @Override
-    int getMove(String player1Move, String player2Move) {
-        for(int index=0; index<boardLength; index++) {
-            if(canClaimWin(index, player1Move, player2Move)) {
-                return winningMove(index, player1Move, player2Move);
-            } else if(canBlockLoss(index, player1Move, player2Move)) {
-                return blockLoss(index, player1Move, player2Move);
+    int getMove(String otherPlayerMove, String thisAiPlayerMove) {
+        for(int index=0; index<boardSize; index++) {
+            if(canClaimWin(index, otherPlayerMove, thisAiPlayerMove)) {
+                return winningMove(index, otherPlayerMove, thisAiPlayerMove);
+            } else if(canBlockLoss(index, otherPlayerMove, thisAiPlayerMove)) {
+                return blockLoss(index, otherPlayerMove, thisAiPlayerMove);
             }
         }
         if(middleSpaceAvailable()) return middleSpace;
@@ -32,12 +31,12 @@ public class SmartAiPlayer extends Player {
         return spaceAvailable(boardObject.board, middleSpace);
     }
 
-    private boolean canClaimWin(int index, String player1Move, String player2Move) {
-        return winningMove(index, player1Move, player2Move) != -1;
+    private boolean canClaimWin(int index, String otherPlayerMove, String thisAiPlayerMove) {
+        return winningMove(index, otherPlayerMove, thisAiPlayerMove) != -1;
     }
 
-    private boolean canBlockLoss(int index, String player1Move, String player2Move) {
-        return blockLoss(index, player1Move, player2Move) != -1;
+    private boolean canBlockLoss(int index, String otherPlayerMove, String thisAiPlayerMove) {
+        return blockLoss(index, otherPlayerMove, thisAiPlayerMove) != -1;
     }
 
     private int winningMove(int index, String otherPlayerMove, String thisAiPlayerMove) {
@@ -51,11 +50,11 @@ public class SmartAiPlayer extends Player {
         return -1;
     }
 
-    private int blockLoss(int index, String player1Move, String player2Move) {
+    private int blockLoss(int index, String otherPlayerMove, String thisAiPlayerMove) {
         HashMap testBoard = cloneBoard(boardObject.board);
         if(spaceAvailable(testBoard, index)) {
-            setMove(testBoard, index, player1Move);
-            if(gameOver(testBoard, player1Move, player2Move)) {
+            setMove(testBoard, index, otherPlayerMove);
+            if(gameOver(testBoard, otherPlayerMove, thisAiPlayerMove)) {
                 return index;
             }
         }
@@ -64,15 +63,15 @@ public class SmartAiPlayer extends Player {
 
     private int randomSpace() {
         Random rand = new Random();
-        return rand.nextInt(boardLength-1);
+        return rand.nextInt(boardSize-1);
     }
 
     private HashMap cloneBoard(HashMap board) { return new HashMap<Object, Object>(board); }
 
     private boolean spaceAvailable(HashMap board, int index) { return boardObject.spaceAvailable(board, index); }
 
-    private boolean gameOver(HashMap board, String player1Move, String player2Move) {
-        return boardObject.gameOver(board, player1Move, player2Move);
+    private boolean gameOver(HashMap board, String otherPlayerMove, String thisAiPlayerMove) {
+        return boardObject.gameOver(board, otherPlayerMove, thisAiPlayerMove);
     }
 
     private void setMove(HashMap board, int index, String playerMove) { boardObject.setMove(board, index, playerMove); }

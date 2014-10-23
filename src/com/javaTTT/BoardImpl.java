@@ -6,14 +6,14 @@ import static java.lang.Math.sqrt;
 
 public class BoardImpl extends Board {
 
-    public BoardImpl(int size) {
-        boardSideLength = size;
-        boardLength = calculateBoardLengthFromSideLength(boardSideLength);
-        board = createEmptyBoard(boardLength);
+    public BoardImpl(int sideLength) {
+        boardSideLength = sideLength;
+        boardSize = calculateBoardSizeFromSideLength(boardSideLength);
+        board = createEmptyBoard(boardSize);
     }
 
     @Override
-    int calculateBoardLengthFromSideLength(int boardSideLength) { return boardSideLength * boardSideLength; }
+    int calculateBoardSizeFromSideLength(int boardSideLength) { return boardSideLength * boardSideLength; }
 
     @Override
     int calculateBoardSizeFromBoard(HashMap board) {
@@ -22,14 +22,14 @@ public class BoardImpl extends Board {
 
     @Override
     int calculateBoardSideLengthFromBoard(HashMap board) {
-        int boardLength = calculateBoardSizeFromBoard(board);
-        return (int) sqrt(boardLength);
+        int boardSize = calculateBoardSizeFromBoard(board);
+        return (int) sqrt(boardSize);
     }
 
     @Override
-    HashMap createEmptyBoard(int boardLength) {
+    HashMap createEmptyBoard(int boardSize) {
         HashMap<Integer, String> myBoard = new HashMap<Integer, String>();
-        for(int i=0; i<boardLength; i++) {
+        for(int i=0; i<boardSize; i++) {
             myBoard.put(i, " ");
         }
         return myBoard;
@@ -140,9 +140,9 @@ public class BoardImpl extends Board {
 
     @Override
     public boolean tieGame(HashMap board) {
-        int boardLength = calculateBoardSizeFromBoard(board);
+        int boardSize = calculateBoardSizeFromBoard(board);
         boolean gameOver = true;
-        for(int i=0; i<boardLength; i++) {
+        for(int i=0; i<boardSize; i++) {
             if(spaceAvailable(board, i)) {
                 gameOver = false;
             }

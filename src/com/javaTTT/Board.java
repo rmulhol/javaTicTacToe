@@ -4,9 +4,9 @@ import java.util.HashMap;
 
 abstract class Board {
     int boardSideLength;
-    int boardLength;
+    int boardSize;
     HashMap board;
-    abstract int calculateBoardLengthFromSideLength(int boardSize);
+    abstract int calculateBoardSizeFromSideLength(int boardSize);
     abstract int calculateBoardSizeFromBoard(HashMap board);
     abstract int calculateBoardSideLengthFromBoard(HashMap board);
     abstract HashMap createEmptyBoard(int boardLength);

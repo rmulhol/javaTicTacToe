@@ -10,7 +10,19 @@ public class MessagesImpl extends Messages {
     String introduceGame() {
         return "Hello. Welcome to tic tac toe!" + "\n" +
         "By default, this game is set to run HvC with a 3x3 board." + "\n" +
-        "However, you can modify these settings." + "\n";
+        "Would you like to modify these settings? (y/n)." + "\n";
+    }
+
+    // arbitrary capping board size at 9x9 but can run bigger w/ change to regex in config
+    @Override
+    String getBoardSize() {
+        return "What do you want the side length of the board to be? (enter any number between 3 and 9)";
+    }
+
+    @Override
+    String getPlayerIdentity(int i) {
+        return "What will be the identity of player " + i + "?" + "\n" +
+                "Enter 1 for human player, 2 for dumb ai player, or 3 for less dumb ai player.";
     }
 
     @Override
@@ -70,6 +82,11 @@ public class MessagesImpl extends Messages {
         }
         boardLine += "|" + "\n";
         return boardLine;
+    }
+
+    @Override
+    String announceInputError() {
+        return "Invalid input! Please try again.";
     }
 
 }

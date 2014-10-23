@@ -12,7 +12,7 @@ public class MockBoard extends Board {
     boolean gameOverCalled = false;
 
     @Override
-    int calculateBoardLengthFromSideLength(int boardSize) {
+    int calculateBoardSizeFromSideLength(int boardSize) {
         return 0;
     }
 

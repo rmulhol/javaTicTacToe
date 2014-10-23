@@ -16,13 +16,13 @@ public class BoardImplTest {
 
     @Test
     public void testCalculatesBoardLengthForSideLength3() {
-        int actualBoardSize = testBoard.calculateBoardLengthFromSideLength(3);
+        int actualBoardSize = testBoard.calculateBoardSizeFromSideLength(3);
         assertEquals(9, actualBoardSize);
     }
 
     @Test
     public void testCalculatesBoardLengthForSideLength4() {
-        int actualBoardSize = testBoard.calculateBoardLengthFromSideLength(4);
+        int actualBoardSize = testBoard.calculateBoardSizeFromSideLength(4);
         assertEquals(16, actualBoardSize);
     }
 

@@ -5,28 +5,62 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Configuration {
-    public Player chooseGameType(Board board) {
-        Player player2 = null;
-        System.out.println("How do you want to play? Enter 0 for Human vs Human, 1 for Human vs (Dumb) Computer, or 2 for Human vs (Less Dumb) Computer.");
-        String gameType = null;
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    Display display;
+
+    Configuration(Display display) {
+        this.display = display;
+    }
+
+    public Runner chooseGameSetup() {
+        display.introduceGame();
+
+        // asks if user want to modify default configuration
+        String modifySettings = "";
+        BufferedReader settings = new BufferedReader(new InputStreamReader(System.in));
         try {
-            gameType = br.readLine();
+            modifySettings = settings.readLine();
         } catch (IOException e) {
-            System.err.println("Invalid input! Please enter a valid move (unoccupied index between 0-8)!");
+            System.err.println("Invalid input!");
         }
-        if(!gameType.equals("0") && !gameType.equals("1") && !gameType.equals("2")) {
-            System.out.println("Sorry, didn't understand that. Since you didn't enter 0, 1, or 2, I'm starting" +
-            " the game with you playing against the less dumb AI player.");
-            player2 = new SmartAiPlayer(board);
-        } else if(gameType.equals("2")) {
-            player2 = new SmartAiPlayer(board);
-        } else if(gameType.equals("1")) {
-            player2 = new DumbAiPlayer(board);
+
+        if(!modifySettings.equals("y")) {
+
+            // runs default game setup if user input != "y"
+            Board board = new BoardImpl(3);
+            Player humanPlayer = new HumanPlayer(display, board);
+            Player smartAiPlayer = new SmartAiPlayer(board);
+            return new Runner(display, board, humanPlayer, smartAiPlayer);
+
         } else {
-            player2 = new HumanPlayer();
+
+            // constructs board according to user input, looping for valid input
+            display.getBoardSize();
+            int boardSideLength = display.getValidInteger("[3-9]");
+            Board board = new BoardImpl(boardSideLength);
+
+            // constructs player 1 according to user input, looping for valid input
+            display.getPlayerIdentity(1);
+            int player1Identity = display.getValidInteger("[1-3]");
+            Player player1 = createPlayer(player1Identity, board);
+
+            // constructs player 2 according to user input, looping for valid input
+            display.getPlayerIdentity(2);
+            int player2Identity = display.getValidInteger("[1-3]");
+            Player player2 = createPlayer(player2Identity, board);
+
+            return new Runner(display, board, player1, player2);
         }
-        return player2;
+    }
+
+    Player createPlayer(int i, Board board) {
+        if(i == 1) {
+            return new HumanPlayer(display, board);
+        } else if(i == 2) {
+            return new DumbAiPlayer(board);
+        } else {
+            return new SmartAiPlayer(board);
+        }
     }
 
 }

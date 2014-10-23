@@ -6,6 +6,10 @@ abstract class Display {
 
     abstract void introduceGame();
 
+    abstract void getBoardSize();
+
+    abstract void getPlayerIdentity(int i);
+
     abstract void displayBoardWithIndexes(int boardSize);
 
     abstract void displayBoard(HashMap board);
@@ -14,6 +18,12 @@ abstract class Display {
 
     abstract void announceTieGame();
 
+    abstract void announceInputError();
 
+    abstract String getInput();
+
+    abstract int getValidInteger(String regex);
+
+    abstract int getValidInteger(int maxValue);
 
 }

@@ -6,6 +6,10 @@ abstract class Messages {
 
     abstract String introduceGame();
 
+    abstract String getBoardSize();
+
+    abstract String getPlayerIdentity(int i);
+
     abstract String displayBoardWithIndexes(int boardSize);
 
     abstract String boardWithIndexes(int boardSize);
@@ -17,6 +21,8 @@ abstract class Messages {
     abstract String announceTieGame();
 
     abstract String boardLine(int boardSideLength);
+
+    abstract String announceInputError();
 
 
 

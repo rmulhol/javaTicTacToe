@@ -6,4 +6,6 @@ abstract class IO {
 
     abstract void printNoLine(String string);
 
+    abstract String getInput();
+
 }

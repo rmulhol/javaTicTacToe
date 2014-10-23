@@ -5,19 +5,26 @@ import java.util.HashMap;
 public class DisplayImpl extends Display {
     IO ioImpl;
     Messages messages;
-    Board board;
 
 
-    DisplayImpl(IO ioImpl, Messages messages, Board board) {
+    DisplayImpl(IO ioImpl, Messages messages) {
         this.ioImpl = ioImpl;
         this.messages = messages;
-        this.board = board;
     }
-
 
     @Override
     void introduceGame() {
         ioImpl.printLine(messages.introduceGame());
+    }
+
+    @Override
+    void getBoardSize() {
+        ioImpl.printLine(messages.getBoardSize());
+    }
+
+    @Override
+    void getPlayerIdentity(int i) {
+        ioImpl.printLine(messages.getPlayerIdentity(i));
     }
 
     @Override
@@ -38,5 +45,41 @@ public class DisplayImpl extends Display {
     @Override
     void announceTieGame() {
         ioImpl.printLine(messages.announceTieGame());
+    }
+
+    @Override
+    void announceInputError() {
+        ioImpl.printLine(messages.announceInputError());
+    }
+
+    @Override
+    String getInput() {
+        return ioImpl.getInput();
+    }
+
+    @Override
+    int getValidInteger(String regex) {
+        String integer = getInput();
+        while (!integer.matches(regex)) {
+            announceInputError();
+            integer = getInput();
+        }
+        return Integer.parseInt(integer);
+    }
+
+    int getValidInteger(int maxValue) {
+        String integer = getInput();
+        int integerToCheck = -1;
+        if(integer.matches("(|[0-9])[0-9]")) {
+            integerToCheck = Integer.parseInt(integer);
+        }
+        while(!integer.matches("(|[0-9])[0-9]") || integerToCheck < 0 || integerToCheck > maxValue) {
+            announceInputError();
+            integer = getInput();
+            if(integer.matches("(|[0-9])[0-9]")) {
+                integerToCheck = Integer.parseInt(integer);
+            }
+        }
+        return integerToCheck;
     }
 }

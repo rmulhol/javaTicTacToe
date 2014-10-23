@@ -15,6 +15,16 @@ public class MockDisplay extends Display{
     void introduceGame() { gameIntroduced = true; }
 
     @Override
+    void getBoardSize() {
+
+    }
+
+    @Override
+    void getPlayerIdentity(int i) {
+
+    }
+
+    @Override
     void displayBoardWithIndexes(int boardSize) {
         indexesDisplayed = true;
     }
@@ -27,6 +37,26 @@ public class MockDisplay extends Display{
 
     @Override
     void announceTieGame() { tieGameAnnounced = true; }
+
+    @Override
+    void announceInputError() {
+
+    }
+
+    @Override
+    String getInput() {
+        return null;
+    }
+
+    @Override
+    int getValidInteger(String regex) {
+        return 0;
+    }
+
+    @Override
+    int getValidInteger(int maxValue) {
+        return 0;
+    }
 
     boolean verifyGameIntroduced() { return gameIntroduced; }
 

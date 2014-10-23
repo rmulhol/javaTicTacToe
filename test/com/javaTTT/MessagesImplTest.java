@@ -18,6 +18,34 @@ public class MessagesImplTest {
     }
 
     @Test
+    public void testGetBoardSizeQueriesUser() {
+        String getBoardSize = messages.getBoardSize();
+        boolean queriesBoardSize = getBoardSize.contains("side length");
+        assertTrue(queriesBoardSize);
+    }
+
+    @Test
+    public void testGetPlayerIdentity() {
+        String getPlayerIdentity = messages.getPlayerIdentity(1);
+        boolean queriesPlayerIdentity = getPlayerIdentity.contains("identity of player");
+        assertTrue(queriesPlayerIdentity);
+    }
+
+    @Test
+    public void testDisplayBoardIndexesIntroducesBoard() {
+        String displayBoardWithIndexes = messages.displayBoardWithIndexes(9);
+        boolean introducesBoard = displayBoardWithIndexes.contains("indexed as follows");
+        assertTrue(introducesBoard);
+    }
+
+    @Test
+    public void testDisplayBoardIndexesStartsGame() {
+        String displayBoardWithIndexes = messages.displayBoardWithIndexes(9);
+        boolean introducesGame = displayBoardWithIndexes.contains("Let's get started!");
+        assertTrue(introducesGame);
+    }
+
+    @Test
     public void testDisplayIndexesWorksForSideLength3() {
         String expectedBoard = "\n" +
                 "|----|----|----|\n" +
@@ -118,6 +146,13 @@ public class MessagesImplTest {
         String expectedBoardLine = "\n|----|----|----|----|\n";
         String actualBoardLine = messages.boardLine(4);
         assertEquals(expectedBoardLine, actualBoardLine);
+    }
+
+    @Test
+    public void testInputError() {
+        String inputError = messages.announceInputError();
+        boolean announcesInputError = inputError.contains("Invalid input!");
+        assertTrue(announcesInputError);
     }
 
 }
