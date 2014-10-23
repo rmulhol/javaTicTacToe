@@ -67,19 +67,4 @@ public class DisplayImpl extends Display {
         return Integer.parseInt(integer);
     }
 
-    int getValidInteger(int maxValue) {
-        String integer = getInput();
-        int integerToCheck = -1;
-        if(integer.matches("(|[0-9])[0-9]")) {
-            integerToCheck = Integer.parseInt(integer);
-        }
-        while(!integer.matches("(|[0-9])[0-9]") || integerToCheck < 0 || integerToCheck > maxValue) {
-            announceInputError();
-            integer = getInput();
-            if(integer.matches("(|[0-9])[0-9]")) {
-                integerToCheck = Integer.parseInt(integer);
-            }
-        }
-        return integerToCheck;
-    }
 }

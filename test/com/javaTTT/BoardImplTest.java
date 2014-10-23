@@ -252,6 +252,18 @@ public class BoardImplTest {
     }
 
     @Test
+    public void testSpaceInRangeOk() {
+        boolean spaceInRange = testBoard.spaceInRange(9, 0);
+        assertTrue(spaceInRange);
+    }
+
+    @Test
+    public void testSpaceOutOfRangeNotOk() {
+        boolean spaceOutOfRange = testBoard.spaceInRange(9, 10);
+        assertFalse(spaceOutOfRange);
+    }
+
+    @Test
     public void testGameOverRecognizesPlayerWin() {
         for(int i=0; i<9; i++) {
             testBoard.setMove(testBoard.board, i, "X");

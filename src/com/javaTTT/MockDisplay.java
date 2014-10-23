@@ -53,11 +53,6 @@ public class MockDisplay extends Display{
         return 0;
     }
 
-    @Override
-    int getValidInteger(int maxValue) {
-        return 0;
-    }
-
     boolean verifyGameIntroduced() { return gameIntroduced; }
 
     boolean verifyBoardDisplayed() { return boardDisplayed; }

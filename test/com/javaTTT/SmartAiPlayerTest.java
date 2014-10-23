@@ -9,6 +9,7 @@ public class SmartAiPlayerTest {
     private Board testBoard = new BoardImpl(3);
     private Player smartAiPlayer = new SmartAiPlayer(testBoard);
 
+    // all of these tests are dependent on the board class
 
     @Test
     public void testAiClaimsWinner() {

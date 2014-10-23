@@ -10,6 +10,7 @@ public class MockBoard extends Board {
     boolean spaceAvailableCalled = false;
     boolean playerWinsCalled = false;
     boolean gameOverCalled = false;
+    boolean spaceInRangeCalled = false;
 
     @Override
     int calculateBoardSizeFromSideLength(int boardSize) {
@@ -41,6 +42,12 @@ public class MockBoard extends Board {
     @Override
     boolean spaceAvailable(HashMap board, int move) {
         spaceAvailableCalled = true;
+        return false;
+    }
+
+    @Override
+    boolean spaceInRange(int boardSize, int move) {
+        spaceInRangeCalled = true;
         return false;
     }
 
@@ -84,6 +91,8 @@ public class MockBoard extends Board {
     boolean tieGameCalled() { return tieGameCalled; }
 
     boolean spaceAvailableCalled() { return spaceAvailableCalled; }
+
+    boolean spaceInRangeCalled() { return spaceInRangeCalled; }
 
     boolean playerWinsCalled() { return playerWinsCalled; }
 

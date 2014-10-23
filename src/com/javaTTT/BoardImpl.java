@@ -115,6 +115,11 @@ public class BoardImpl extends Board {
     boolean spaceAvailable(HashMap board, int move) { return board.get(move) == " "; }
 
     @Override
+    boolean spaceInRange(int boardSize, int move) {
+        return move >= 0 && move <= boardSize - 1;
+    }
+
+    @Override
     boolean gameOver(HashMap board, String player1Move, String player2move) {
         return playerWins(board, player1Move) || playerWins(board, player2move) || tieGame(board);
     }

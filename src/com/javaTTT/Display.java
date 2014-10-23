@@ -24,6 +24,4 @@ abstract class Display {
 
     abstract int getValidInteger(String regex);
 
-    abstract int getValidInteger(int maxValue);
-
 }

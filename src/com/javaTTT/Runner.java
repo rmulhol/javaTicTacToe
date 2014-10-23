@@ -33,7 +33,7 @@ public class Runner {
 
     public void setPlayer1Move() {
         int move = getPlayer1Move();
-        while(!spaceAvailable(move)) {
+        while(!spaceAvailable(move) || !spaceInRange(move)) {
             move = getPlayer1Move();
         }
         setMove(move);
@@ -43,7 +43,7 @@ public class Runner {
 
     public void setPlayer2Move() {
         int move = getPlayer2Move();
-        while(!spaceAvailable(move)) {
+        while(!spaceAvailable(move) || !spaceInRange(move)) {
             move = getPlayer2Move();
         }
         setMove(move);
@@ -78,6 +78,8 @@ public class Runner {
     public int getPlayer2Move() { return player2.getMove(player1Move, player2Move); }
 
     public boolean spaceAvailable(int move) { return board.spaceAvailable(board.board, move); }
+
+    public boolean spaceInRange(int move) { return board.spaceInRange(board.boardSize, move); }
 
     public boolean player1Wins() { return board.playerWins(board.board, player1Move); }
 

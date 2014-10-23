@@ -80,6 +80,13 @@ public class RunnerTest {
     }
 
     @Test
+    public void testCheckSpaceInRange() {
+        newGame.spaceInRange(1);
+        boolean spaceInRangeChecked = mockBoard.spaceInRangeCalled();
+        assertTrue(spaceInRangeChecked);
+    }
+
+    @Test
     public void testXWins() {
         newGame.player1Wins();
         boolean playerWinsCalled = mockBoard.playerWinsCalled();
