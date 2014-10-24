@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 public class SmartAiPlayerTest {
 
     private Board testBoard = new BoardImpl(3);
-    private Player smartAiPlayer = new SmartAiPlayer(testBoard);
+    private Player smartAiPlayer = new SmartAiPlayer(testBoard, "O");
 
     // all of these tests are dependent on the board class
 
@@ -46,7 +46,7 @@ public class SmartAiPlayerTest {
     @Test
     public void testAiClaimsMiddleByDefault() {
         Board newTestBoard = new BoardImpl(3);
-        Player newSmartAiPlayer = new SmartAiPlayer(newTestBoard);
+        Player newSmartAiPlayer = new SmartAiPlayer(newTestBoard, "O");
         int middleClaim = newSmartAiPlayer.getMove("X", "O");
         assertEquals(4, middleClaim);
     }

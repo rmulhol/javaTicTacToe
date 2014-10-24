@@ -6,9 +6,13 @@ abstract class Messages {
 
     abstract String introduceGame();
 
+    abstract String offerCustomSettings();
+
     abstract String getBoardSize();
 
     abstract String getPlayerIdentity(int i);
+
+    abstract String getPlayerMoveSignature(int i);
 
     abstract String displayBoardWithIndexes(int boardSize);
 

@@ -7,11 +7,13 @@ public class SmartAiPlayer extends Player {
     Board boardObject;
     int boardSize;
     int middleSpace;
+    String moveSignature;
 
-    SmartAiPlayer(Board boardObject) {
+    SmartAiPlayer(Board boardObject, String moveSignature) {
         this.boardObject = boardObject;
         boardSize = boardObject.boardSize;
         middleSpace = boardSize/2;
+        this.moveSignature = moveSignature;
     }
 
     @Override
@@ -25,6 +27,11 @@ public class SmartAiPlayer extends Player {
         }
         if(middleSpaceAvailable()) return middleSpace;
         else return randomSpace();
+    }
+
+    @Override
+    String getMoveSignature() {
+        return moveSignature;
     }
 
     private boolean middleSpaceAvailable() {

@@ -10,6 +10,11 @@ public class MockPlayer extends Player {
         return 0;
     }
 
+    @Override
+    String getMoveSignature() {
+        return null;
+    }
+
     boolean getMoveCalled() { return getMoveCalled; }
 
 }

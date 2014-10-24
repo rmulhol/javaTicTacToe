@@ -6,9 +6,13 @@ abstract class Display {
 
     abstract void introduceGame();
 
+    abstract void offerCustomSettings();
+
     abstract void getBoardSize();
 
     abstract void getPlayerIdentity(int i);
+
+    abstract void getPlayerMoveSignature(int i);
 
     abstract void displayBoardWithIndexes(int boardSize);
 

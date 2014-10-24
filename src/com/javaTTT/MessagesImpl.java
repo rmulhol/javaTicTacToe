@@ -8,8 +8,12 @@ public class MessagesImpl extends Messages {
 
     @Override
     String introduceGame() {
-        return "Hello. Welcome to tic tac toe!" + "\n" +
-        "By default, this game is set to run HvC with a 3x3 board." + "\n" +
+        return "Hello. Welcome to tic tac toe!" + "\n";
+    }
+
+    @Override
+    String offerCustomSettings() {
+        return "By default, this game is set to run HvC with a 3x3 board." + "\n" +
         "Would you like to modify these settings? (y/n)." + "\n";
     }
 
@@ -23,6 +27,12 @@ public class MessagesImpl extends Messages {
     String getPlayerIdentity(int i) {
         return "What will be the identity of player " + i + "?" + "\n" +
                 "Enter 1 for human player, 2 for dumb ai player, or 3 for less dumb ai player.";
+    }
+
+    @Override
+    String getPlayerMoveSignature(int i) {
+        return "What will be the move signature of player " + i +"?" + "\n" +
+                "Enter any single character (e.g. X, O, etc.)";
     }
 
     @Override

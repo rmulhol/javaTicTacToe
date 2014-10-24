@@ -59,16 +59,9 @@ public class RunnerTest {
     }
 
     @Test
-    public void testGetPlayer1Move() {
-        newGame.getPlayer1Move();
+    public void testGetPlayerMove() {
+        newGame.getPlayerMove(mockPlayer1);
         boolean getMoveCalled = mockPlayer1.getMoveCalled();
-        assertTrue(getMoveCalled);
-    }
-
-    @Test
-    public void testGetPlayer2Move() {
-        newGame.getPlayer2Move();
-        boolean getMoveCalled = mockPlayer2.getMoveCalled();
         assertTrue(getMoveCalled);
     }
 

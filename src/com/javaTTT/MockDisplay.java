@@ -4,30 +4,34 @@ import java.util.HashMap;
 
 public class MockDisplay extends Display{
 
+    boolean gameIntroduced = false;
+    boolean customSettingsOffered = false;
     boolean boardDisplayed = false;
     boolean playerWinAnnounced = false;
     boolean tieGameAnnounced = false;
-    boolean gameIntroduced = false;
     boolean indexesDisplayed = false;
+    boolean getInputCalled = false;
+    boolean getValidIntegerCalled = false;
+    boolean announceInputErrorCalled = false;
 
 
     @Override
     void introduceGame() { gameIntroduced = true; }
 
     @Override
-    void getBoardSize() {
-
-    }
+    void offerCustomSettings() { customSettingsOffered = true; }
 
     @Override
-    void getPlayerIdentity(int i) {
-
-    }
+    void getBoardSize() {}
 
     @Override
-    void displayBoardWithIndexes(int boardSize) {
-        indexesDisplayed = true;
-    }
+    void getPlayerIdentity(int i) {}
+
+    @Override
+    void getPlayerMoveSignature(int i) {}
+
+    @Override
+    void displayBoardWithIndexes(int boardSize) { indexesDisplayed = true; }
 
     @Override
     void displayBoard(HashMap boardArray) { boardDisplayed = true; }
@@ -39,23 +43,32 @@ public class MockDisplay extends Display{
     void announceTieGame() { tieGameAnnounced = true; }
 
     @Override
-    void announceInputError() {
-
-    }
+    void announceInputError() { announceInputErrorCalled = true; }
 
     @Override
     String getInput() {
-        return null;
+        getInputCalled = true;
+        // returning X instead of null bc configuration test loops until valid move signature
+        return "X";
     }
 
     @Override
     int getValidInteger(String regex) {
+        getValidIntegerCalled = true;
         return 0;
     }
 
     boolean verifyGameIntroduced() { return gameIntroduced; }
 
+    boolean verifyCustomSettingsOffered() { return customSettingsOffered; }
+
     boolean verifyBoardDisplayed() { return boardDisplayed; }
+
+    boolean verifyGetInputCalled() { return getInputCalled; }
+
+    boolean verifyGetValidIntegerCalled() { return getValidIntegerCalled; }
+
+    boolean verifyAnnounceInputErrorCalled() { return announceInputErrorCalled; }
 
     boolean playerWinAnnounced() { return playerWinAnnounced; }
 

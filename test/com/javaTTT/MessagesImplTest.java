@@ -18,6 +18,13 @@ public class MessagesImplTest {
     }
 
     @Test
+    public void testOfferCustomSettingsOffersDefault() {
+        String offerCustomSettings = messages.offerCustomSettings();
+        boolean saysDefault = offerCustomSettings.contains("default");
+        assertTrue(saysDefault);
+    }
+
+    @Test
     public void testGetBoardSizeQueriesUser() {
         String getBoardSize = messages.getBoardSize();
         boolean queriesBoardSize = getBoardSize.contains("side length");

@@ -18,6 +18,11 @@ public class DisplayImpl extends Display {
     }
 
     @Override
+    void offerCustomSettings() {
+        ioImpl.printLine(messages.offerCustomSettings());
+    }
+
+    @Override
     void getBoardSize() {
         ioImpl.printLine(messages.getBoardSize());
     }
@@ -25,6 +30,11 @@ public class DisplayImpl extends Display {
     @Override
     void getPlayerIdentity(int i) {
         ioImpl.printLine(messages.getPlayerIdentity(i));
+    }
+
+    @Override
+    void getPlayerMoveSignature(int i) {
+        ioImpl.printLine(messages.getPlayerMoveSignature(i));
     }
 
     @Override

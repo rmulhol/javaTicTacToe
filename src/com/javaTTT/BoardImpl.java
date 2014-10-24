@@ -6,7 +6,7 @@ import static java.lang.Math.sqrt;
 
 public class BoardImpl extends Board {
 
-    public BoardImpl(int sideLength) {
+    BoardImpl(int sideLength) {
         boardSideLength = sideLength;
         boardSize = calculateBoardSizeFromSideLength(boardSideLength);
         board = createEmptyBoard(boardSize);
@@ -81,7 +81,7 @@ public class BoardImpl extends Board {
     }
 
     @Override
-    public int[][] rightToLeftDiagonal(int boardSideLength) {
+    int[][] rightToLeftDiagonal(int boardSideLength) {
         int[][] rightToLeftDiagonal = new int[1][boardSideLength];
         int counter = boardSideLength - 1;
         for(int i=0; i<boardSideLength; i++) {
@@ -125,7 +125,7 @@ public class BoardImpl extends Board {
     }
 
     @Override
-    public boolean playerWins(HashMap board, String playerMove) {
+    boolean playerWins(HashMap board, String playerMove) {
         int boardSideLength = calculateBoardSideLengthFromBoard(board);
         int[][] winningCombinations = winningCombinations(boardSideLength);
         boolean gameOver = false;
@@ -144,7 +144,7 @@ public class BoardImpl extends Board {
     }
 
     @Override
-    public boolean tieGame(HashMap board) {
+    boolean tieGame(HashMap board) {
         int boardSize = calculateBoardSizeFromBoard(board);
         boolean gameOver = true;
         for(int i=0; i<boardSize; i++) {
