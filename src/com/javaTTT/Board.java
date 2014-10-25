@@ -17,8 +17,9 @@ abstract class Board {
     abstract int[][] leftToRightDiagonal(int boardSize);
     abstract int[][] rightToLeftDiagonal(int boardSize);
     abstract int[][] winningCombinations(int boardSize);
+    abstract boolean moveIsValid(HashMap board, int move);
     abstract boolean spaceAvailable(HashMap board, int move);
-    abstract boolean spaceInRange(int boardSize, int move);
+    abstract boolean spaceInRange(HashMap board, int move);
     abstract boolean playerWins(HashMap board, String playerMove);
     abstract boolean tieGame(HashMap board);
     abstract boolean gameOver(HashMap board, String player1Move, String player2Move);

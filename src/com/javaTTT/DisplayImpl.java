@@ -13,59 +13,38 @@ public class DisplayImpl extends Display {
     }
 
     @Override
-    void introduceGame() {
-        ioImpl.printLine(messages.introduceGame());
-    }
+    void introduceGame() { ioImpl.printLine(messages.introduceGame()); }
 
     @Override
-    void offerCustomSettings() {
-        ioImpl.printLine(messages.offerCustomSettings());
-    }
+    void offerCustomSettings() { ioImpl.printLine(messages.offerCustomSettings()); }
 
     @Override
-    void getBoardSize() {
-        ioImpl.printLine(messages.getBoardSize());
-    }
+    void getBoardSize() { ioImpl.printLine(messages.getBoardSize()); }
 
     @Override
-    void getPlayerIdentity(int i) {
-        ioImpl.printLine(messages.getPlayerIdentity(i));
-    }
+    void getPlayerIdentity(int i) { ioImpl.printLine(messages.getPlayerIdentity(i)); }
 
     @Override
-    void getPlayerMoveSignature(int i) {
-        ioImpl.printLine(messages.getPlayerMoveSignature(i));
-    }
+    void getPlayerMoveSignature(int i) { ioImpl.printLine(messages.getPlayerMoveSignature(i)); }
 
     @Override
-    void displayBoardWithIndexes(int boardSize) {
-        ioImpl.printLine(messages.displayBoardWithIndexes(boardSize));
-    }
+    void displayBoardWithIndexes(int boardSize) { ioImpl.printLine(messages.displayBoardWithIndexes(boardSize)); }
 
     @Override
-    void displayBoard(HashMap board) {
-        ioImpl.printLine(messages.displayBoard(board));
-    }
+    void displayBoard(HashMap board) { ioImpl.printLine(messages.displayBoard(board)); }
 
     @Override
-    void announceWinForPlayer(String playerMove) {
-        ioImpl.printLine(messages.announceWinForPlayer(playerMove));
-    }
+    void announcePlayerWin(String playerMove) { ioImpl.printLine(messages.announceWinForPlayer(playerMove)); }
+
 
     @Override
-    void announceTieGame() {
-        ioImpl.printLine(messages.announceTieGame());
-    }
+    void announceTieGame() { ioImpl.printLine(messages.announceTieGame()); }
 
     @Override
-    void announceInputError() {
-        ioImpl.printLine(messages.announceInputError());
-    }
+    void announceInputError() { ioImpl.printLine(messages.announceInputError()); }
 
     @Override
-    String getInput() {
-        return ioImpl.getInput();
-    }
+    String getInput() { return ioImpl.getInput(); }
 
     @Override
     int getValidInteger(String regex) {

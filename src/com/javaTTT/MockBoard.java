@@ -6,11 +6,10 @@ public class MockBoard extends Board {
 
     boolean getBoardCalled = false;
     boolean setMoveCalled = false;
+    boolean moveIsValidCalled = false;
     boolean tieGameCalled = false;
-    boolean spaceAvailableCalled = false;
     boolean playerWinsCalled = false;
     boolean gameOverCalled = false;
-    boolean spaceInRangeCalled = false;
 
     @Override
     int calculateBoardSizeFromSideLength(int boardSize) {
@@ -40,14 +39,18 @@ public class MockBoard extends Board {
     void setMove(HashMap board, int move, String player) { setMoveCalled = true; }
 
     @Override
-    boolean spaceAvailable(HashMap board, int move) {
-        spaceAvailableCalled = true;
+    boolean moveIsValid(HashMap board, int move) {
+        moveIsValidCalled = true;
         return false;
     }
 
     @Override
-    boolean spaceInRange(int boardSize, int move) {
-        spaceInRangeCalled = true;
+    boolean spaceAvailable(HashMap board, int move) {
+        return false;
+    }
+
+    @Override
+    boolean spaceInRange(HashMap board, int move) {
         return false;
     }
 
@@ -84,18 +87,16 @@ public class MockBoard extends Board {
         return false;
     }
 
-    boolean getBoardCalled() { return getBoardCalled; }
+    boolean verifyGetBoardCalled() { return getBoardCalled; }
 
-    boolean setMoveCalled() { return setMoveCalled; }
+    boolean verifySetMoveCalled() { return setMoveCalled; }
 
-    boolean tieGameCalled() { return tieGameCalled; }
+    boolean verifyMoveIsValidCalled() { return moveIsValidCalled; }
 
-    boolean spaceAvailableCalled() { return spaceAvailableCalled; }
+    boolean verifyTieGameCalled() { return tieGameCalled; }
 
-    boolean spaceInRangeCalled() { return spaceInRangeCalled; }
+    boolean verifyPlayerWinsCalled() { return playerWinsCalled; }
 
-    boolean playerWinsCalled() { return playerWinsCalled; }
-
-    boolean gameOverCalled() { return gameOverCalled; }
+    boolean verifyGameOverCalled() { return gameOverCalled; }
 
 }

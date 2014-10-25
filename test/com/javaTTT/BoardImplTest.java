@@ -228,8 +228,26 @@ public class BoardImplTest {
     }
 
     @Test
+    public void testMoveIsValidAllowsMovesOnAvailableSpacesInRange() {
+        boolean validMove = testBoard.moveIsValid(testBoard.board, 0);
+        assertTrue(validMove);
+    }
+
+    @Test
+    public void testMoveIsValidRejectsMovesOnClaimedSpaces() {
+        testBoard.setMove(testBoard.board, 0, "X");
+        boolean invalidMove = testBoard.moveIsValid(testBoard.board, 0);
+        assertFalse(invalidMove);
+    }
+
+    @Test
+    public void testMoveIsValidRejectsMovesThatAreOutOfRange() {
+        boolean invalidMove = testBoard.moveIsValid(testBoard.board, 99);
+        assertFalse(invalidMove);
+    }
+
+    @Test
     public void testAllSpacesAvailableAtBeginning() {
-        testBoard.createEmptyBoard(3);
         boolean allSpacesEmpty = true;
         for (int i = 0; i < 9; i++) {
             if (!testBoard.spaceAvailable(testBoard.board, i)) {
@@ -253,13 +271,13 @@ public class BoardImplTest {
 
     @Test
     public void testSpaceInRangeOk() {
-        boolean spaceInRange = testBoard.spaceInRange(9, 0);
+        boolean spaceInRange = testBoard.spaceInRange(testBoard.board, 0);
         assertTrue(spaceInRange);
     }
 
     @Test
     public void testSpaceOutOfRangeNotOk() {
-        boolean spaceOutOfRange = testBoard.spaceInRange(9, 10);
+        boolean spaceOutOfRange = testBoard.spaceInRange(testBoard.board, 10);
         assertFalse(spaceOutOfRange);
     }
 
@@ -281,7 +299,7 @@ public class BoardImplTest {
         testBoard.setMove(gameBoard, 3, "X");
         testBoard.setMove(gameBoard, 4, "O");
         testBoard.setMove(gameBoard, 5, "O");
-        testBoard.setMove(gameBoard, 6, "0");
+        testBoard.setMove(gameBoard, 6, "O");
         testBoard.setMove(gameBoard, 7, "X");
         testBoard.setMove(gameBoard, 8, "X");
         boolean gameOver = testBoard.gameOver(gameBoard, "X", "O");
@@ -305,7 +323,7 @@ public class BoardImplTest {
     }
 
     @Test
-    public void testRecognizesTieGame() {
+    public void testRecognizesTieGameIfBoardIsFull() {
         for(int i=0; i<9; i++) {
             testBoard.setMove(testBoard.board, i, "X");
         }

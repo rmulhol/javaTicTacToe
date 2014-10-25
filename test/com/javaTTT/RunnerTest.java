@@ -15,96 +15,95 @@ public class RunnerTest {
 
     private Runner newGame = new Runner(mockDisplay, mockBoard, mockPlayer1, mockPlayer2);
 
+    // Test playGame()
+
+    // Test moveSequence()
+
     @Test
     public void testIntroduceGame() {
         newGame.introduceGame();
-        boolean gameIntroduced = mockDisplay.verifyGameIntroduced();
-        assertTrue(gameIntroduced);
+        boolean displayCalled = mockDisplay.verifyIntroduceGameCalled();
+        assertTrue(displayCalled);
     }
 
     @Test
     public void testGetBoard() {
         newGame.getBoard();
-        boolean gotBoard = mockBoard.getBoardCalled();
-        assertTrue(gotBoard);
+        boolean boardCalled = mockBoard.verifyGetBoardCalled();
+        assertTrue(boardCalled);
     }
 
     @Test
     public void testDisplayBoard() {
         HashMap emptyBoard = new HashMap();
         newGame.displayBoard(emptyBoard);
-        boolean boardDisplayed = mockDisplay.verifyBoardDisplayed();
-        assertTrue(boardDisplayed);
+        boolean displayCalled = mockDisplay.verifyDisplayBoardCalled();
+        assertTrue(displayCalled);
+    }
+
+    @Test
+    public void testDisplayBoardWithIndexes() {
+        newGame.displayBoardWithIndexes(9);
+        boolean displayCalled = mockDisplay.verifyDisplayBoardWithIndexesCalled();
+        assertTrue(displayCalled);
     }
 
     @Test
     public void testSetMove() {
         newGame.setMove(1);
-        boolean setMoveCalled = mockBoard.setMoveCalled();
-        assertTrue(setMoveCalled);
+        boolean boardCalled = mockBoard.verifySetMoveCalled();
+        assertTrue(boardCalled);
     }
 
+    // test announceWinner
+
     @Test
-    public void testAnnounceWinForX() {
-        newGame.announceWinForPlayer("X");
-        boolean playerWinAnnounced = mockDisplay.playerWinAnnounced();
-        assertTrue(playerWinAnnounced);
+    public void testAnnouncePlayerWin() {
+        newGame.announcePlayerWin("X");
+        boolean displayCalled = mockDisplay.verifyAnnouncePlayerWinCalled();
+        assertTrue(displayCalled);
     }
 
     @Test
     public void testAnnounceTieGame() {
         newGame.announceTieGame();
-        boolean tieGameAnnounced = mockDisplay.tieGameAnnounced();
-        assertTrue(tieGameAnnounced);
+        boolean displayCalled = mockDisplay.verifyAnnounceTieGameCalled();
+        assertTrue(displayCalled);
     }
 
     @Test
     public void testGetPlayerMove() {
         newGame.getPlayerMove(mockPlayer1);
-        boolean getMoveCalled = mockPlayer1.getMoveCalled();
-        assertTrue(getMoveCalled);
+        boolean playerCalled = mockPlayer1.verifyGetMoveCalled();
+        assertTrue(playerCalled);
     }
 
     @Test
-    public void testCheckSpaceAvailability() {
-        newGame.spaceAvailable(1);
-        boolean spaceAvailabilityChecked = mockBoard.spaceAvailableCalled();
-        assertTrue(spaceAvailabilityChecked);
+    public void testPlayerMoveIsValid() {
+        newGame.playerMoveIsValid(1);
+        boolean boardCalled = mockBoard.verifyMoveIsValidCalled();
+        assertTrue(boardCalled);
     }
 
     @Test
-    public void testCheckSpaceInRange() {
-        newGame.spaceInRange(1);
-        boolean spaceInRangeChecked = mockBoard.spaceInRangeCalled();
-        assertTrue(spaceInRangeChecked);
-    }
-
-    @Test
-    public void testXWins() {
-        newGame.player1Wins();
-        boolean playerWinsCalled = mockBoard.playerWinsCalled();
-        assertTrue(playerWinsCalled);
-    }
-
-    @Test
-    public void testOWins() {
-        newGame.player2Wins();
-        boolean playerWinsCalled = mockBoard.playerWinsCalled();
-        assertTrue(playerWinsCalled);
+    public void testPlayerWins() {
+        newGame.playerWins("X");
+        boolean boardCalled = mockBoard.verifyPlayerWinsCalled();
+        assertTrue(boardCalled);
     }
 
     @Test
     public void testTieGame() {
         newGame.tieGame();
-        boolean tieGameCalled = mockBoard.tieGameCalled();
-        assertTrue(tieGameCalled);
+        boolean boardCalled = mockBoard.verifyTieGameCalled();
+        assertTrue(boardCalled);
     }
 
     @Test
     public void testGameOver() {
         newGame.gameOver();
-        boolean gameOverCalled = mockBoard.gameOverCalled();
-        assertTrue(gameOverCalled);
+        boolean boardCalled = mockBoard.verifyGameOverCalled();
+        assertTrue(boardCalled);
     }
 
 }

@@ -26,4 +26,6 @@ public class IOImplTest {
         assertTrue(printWasCalled);
     }
 
+    // Test getInput()
+
 }

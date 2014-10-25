@@ -37,7 +37,7 @@ public class MockDisplay extends Display{
     void displayBoard(HashMap boardArray) { boardDisplayed = true; }
 
     @Override
-    void announceWinForPlayer(String playerMove) { playerWinAnnounced = true; }
+    void announcePlayerWin(String playerMove) { playerWinAnnounced = true; }
 
     @Override
     void announceTieGame() { tieGameAnnounced = true; }
@@ -58,11 +58,13 @@ public class MockDisplay extends Display{
         return 0;
     }
 
-    boolean verifyGameIntroduced() { return gameIntroduced; }
+    boolean verifyIntroduceGameCalled() { return gameIntroduced; }
 
-    boolean verifyCustomSettingsOffered() { return customSettingsOffered; }
+    boolean verifyOfferCustomSettingsCalled() { return customSettingsOffered; }
 
-    boolean verifyBoardDisplayed() { return boardDisplayed; }
+    boolean verifyDisplayBoardCalled() { return boardDisplayed; }
+
+    boolean verifyDisplayBoardWithIndexesCalled() { return indexesDisplayed; }
 
     boolean verifyGetInputCalled() { return getInputCalled; }
 
@@ -70,8 +72,8 @@ public class MockDisplay extends Display{
 
     boolean verifyAnnounceInputErrorCalled() { return announceInputErrorCalled; }
 
-    boolean playerWinAnnounced() { return playerWinAnnounced; }
+    boolean verifyAnnouncePlayerWinCalled() { return playerWinAnnounced; }
 
-    boolean tieGameAnnounced() { return tieGameAnnounced; }
+    boolean verifyAnnounceTieGameCalled() { return tieGameAnnounced; }
 
 }

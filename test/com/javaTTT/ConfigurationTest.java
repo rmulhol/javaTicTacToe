@@ -11,6 +11,8 @@ public class ConfigurationTest {
     MockDisplay mockDisplay = new MockDisplay();
     Configuration testConfiguration = new Configuration(mockDisplay);
 
+    // test chooseGameSetup()
+
     @Test
     public void testModifiesSettingsIfUserSaysYes() {
         boolean modifySettings = testConfiguration.userWantsToModifyGameSettings("yes");
@@ -22,6 +24,14 @@ public class ConfigurationTest {
         boolean modifySettings = testConfiguration.userWantsToModifyGameSettings("no");
         assertFalse(modifySettings);
     }
+
+    // test createCustomGame()
+
+    // test createDefaultGame()
+
+    // test createBoard()
+
+    // test createPlayer()
 
     @Test
     public void testGetPlayerIdentityCallsDisplay() {
@@ -37,17 +47,19 @@ public class ConfigurationTest {
         assertTrue(displayCalled);
     }
 
+    // test assignPlayer()
+
     @Test
     public void testIntroduceGameCallsDisplay() {
         testConfiguration.introduceGame();
-        boolean displayCalled = mockDisplay.verifyGameIntroduced();
+        boolean displayCalled = mockDisplay.verifyIntroduceGameCalled();
         assertTrue(displayCalled);
     }
 
     @Test
     public void testOfferCustomSettingsCallsDisplay() {
         testConfiguration.offerCustomGameSettings();
-        boolean displayCalled = mockDisplay.verifyCustomSettingsOffered();
+        boolean displayCalled = mockDisplay.verifyOfferCustomSettingsCalled();
         assertTrue(displayCalled);
     }
 

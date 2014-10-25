@@ -112,10 +112,16 @@ public class BoardImpl extends Board {
     }
 
     @Override
+    boolean moveIsValid(HashMap board, int move) {
+        return spaceAvailable(board, move) && spaceInRange(board, move);
+    }
+
+    @Override
     boolean spaceAvailable(HashMap board, int move) { return board.get(move) == " "; }
 
     @Override
-    boolean spaceInRange(int boardSize, int move) {
+    boolean spaceInRange(HashMap board, int move) {
+        int boardSize = calculateBoardSizeFromBoard(board);
         return move >= 0 && move <= boardSize - 1;
     }
 

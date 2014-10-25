@@ -15,6 +15,6 @@ public class MockPlayer extends Player {
         return null;
     }
 
-    boolean getMoveCalled() { return getMoveCalled; }
+    boolean verifyGetMoveCalled() { return getMoveCalled; }
 
 }

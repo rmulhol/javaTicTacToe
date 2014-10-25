@@ -18,7 +18,7 @@ abstract class Display {
 
     abstract void displayBoard(HashMap board);
 
-    abstract void announceWinForPlayer(String playerMove);
+    abstract void announcePlayerWin(String playerMove);
 
     abstract void announceTieGame();
 

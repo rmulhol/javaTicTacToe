@@ -23,30 +23,20 @@ public class Runner {
 
     public void playGame() {
         HashMap gameBoard = getBoard();
-
+        displayBoardWithIndexes(gameBoard.size());
         displayBoard(gameBoard);
         while(!gameOver()) {
-            setPlayer1Move();
+            moveSequence(player1);
             if(gameOver()) { break; }
-            setPlayer2Move();
+            moveSequence(player2);
         }
         announceWinner();
     }
 
-    void setPlayer1Move() {
-        int move = getPlayerMove(player1);
+    void moveSequence(Player player) {
+        int move = getPlayerMove(player);
         while(!playerMoveIsValid(move)) {
-            move = getPlayerMove(player1);
-        }
-        setMove(move);
-        HashMap myBoard = getBoard();
-        displayBoard(myBoard);
-    }
-
-    void setPlayer2Move() {
-        int move = getPlayerMove(player2);
-        while(!playerMoveIsValid(move)) {
-            move = getPlayerMove(player2);
+            move = getPlayerMove(player);
         }
         setMove(move);
         HashMap myBoard = getBoard();
@@ -59,6 +49,8 @@ public class Runner {
 
     void displayBoard(HashMap board) { display.displayBoard(board); }
 
+    void displayBoardWithIndexes(int boardSize) { display.displayBoardWithIndexes(boardSize);}
+
     void setMove(int move) {
         counter++;
         if(counter % 2 == 1) board.setMove(board.board, move, player1Move);
@@ -66,26 +58,20 @@ public class Runner {
     }
 
     void announceWinner() {
-        if(player1Wins()) announceWinForPlayer(player1Move);
-        else if(player2Wins()) announceWinForPlayer(player2Move);
+        if(playerWins(player1Move)) announcePlayerWin(player1Move);
+        else if(playerWins(player2Move)) announcePlayerWin(player2Move);
         else if(tieGame()) announceTieGame();
     }
 
-    void announceWinForPlayer(String playerMove) { display.announceWinForPlayer(playerMove); }
+    void announcePlayerWin(String playerMove) { display.announcePlayerWin(playerMove); }
 
     void announceTieGame() { display.announceTieGame(); }
 
     int getPlayerMove(Player player) { return player.getMove(player1Move, player2Move); }
 
-    boolean playerMoveIsValid(int move) { return spaceAvailable(move) && spaceInRange(move); }
+    boolean playerMoveIsValid(int move) { return board.moveIsValid(board.board, move); }
 
-    boolean spaceAvailable(int move) { return board.spaceAvailable(board.board, move); }
-
-    boolean spaceInRange(int move) { return board.spaceInRange(board.boardSize, move); }
-
-    boolean player1Wins() { return board.playerWins(board.board, player1Move); }
-
-    boolean player2Wins() { return board.playerWins(board.board, player2Move); }
+    boolean playerWins(String playerMove) { return board.playerWins(board.board, playerMove); }
 
     boolean tieGame() { return board.tieGame(board.board); }
 

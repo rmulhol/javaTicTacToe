@@ -1,9 +1,5 @@
 package com.javaTTT;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
 public class HumanPlayer extends Player {
     Display display;
     String moveSignature;
