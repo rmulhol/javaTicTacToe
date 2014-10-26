@@ -67,7 +67,7 @@ public class Runner {
 
     void announceTieGame() { display.announceTieGame(); }
 
-    int getPlayerMove(Player player) { return player.getMove(player1Move, player2Move); }
+    int getPlayerMove(Player player) { return player.getMove(board.board, player1Move, player2Move); }
 
     boolean playerMoveIsValid(int move) { return board.moveIsValid(board.board, move); }
 

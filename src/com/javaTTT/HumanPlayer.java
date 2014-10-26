@@ -1,5 +1,7 @@
 package com.javaTTT;
 
+import java.util.HashMap;
+
 public class HumanPlayer extends Player {
     Display display;
     String moveSignature;
@@ -12,7 +14,7 @@ public class HumanPlayer extends Player {
     }
 
     @Override
-    public int getMove(String player1Move, String player2Move) {
+    public int getMove(HashMap board, String player1Move, String player2Move) {
         System.out.println("Enter your move: ");
         return display.getValidInteger("(|[0-9])[0-9]");
     }
