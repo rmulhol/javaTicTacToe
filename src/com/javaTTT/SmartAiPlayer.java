@@ -17,18 +17,78 @@ public class SmartAiPlayer extends Player {
     @Override
     int getMove(HashMap board, String otherPlayerMove, String thisAiPlayerMove) {
         int boardSize = board.size();
+
+        // try to win game
         for(int index=0; index<boardSize; index++) {
             if (canClaimWin(board, index, otherPlayerMove, thisAiPlayerMove)) {
                 return winningMove(board, index, otherPlayerMove, thisAiPlayerMove);
             }
         }
+
+        // try to block loss
         for(int index=0; index<boardSize; index++) {
             if(canBlockLoss(board, index, otherPlayerMove, thisAiPlayerMove)) {
                 return blockLossMove(board, index, otherPlayerMove, thisAiPlayerMove);
             }
         }
+
+        // try to claim middle
         if(middleSpaceAvailable(board)) return middleSpace;
-        else return randomSpace(board);
+
+        // try to create fork
+        for(int index=0; index<boardSize; index++) {
+            if(spaceAvailable(board, index)) {
+                int counter = 0;
+                board.put(index, thisAiPlayerMove);
+                for(int subIndex = 0; subIndex<boardSize; subIndex++) {
+                    if(spaceAvailable(board, subIndex)) {
+                        board.put(subIndex, otherPlayerMove);
+                        for (int superSubIndex = 0; superSubIndex < boardSize; superSubIndex++) {
+                            if (canClaimWin(board, superSubIndex, otherPlayerMove, thisAiPlayerMove)) {
+                                counter += 1;
+                                if (counter == 2) {
+                                    board.put(index, " ");
+                                    board.put(subIndex, " ");
+                                    return index;
+                                }
+                            }
+                        }
+                        counter = 0;
+                        board.put(subIndex, " ");
+                    }
+                }
+                board.put(index, " ");
+            }
+        }
+
+        // try to block fork
+        for(int index=0; index<boardSize; index++) {
+            if(spaceAvailable(board, index)) {
+                int counter = 0;
+                board.put(index, thisAiPlayerMove);
+                for(int subIndex = 0; subIndex<boardSize; subIndex++) {
+                    if(spaceAvailable(board, subIndex)) {
+                        board.put(subIndex, otherPlayerMove);
+                        for (int superSubIndex = 0; superSubIndex < boardSize; superSubIndex++) {
+                            if(canClaimWin(board, superSubIndex, thisAiPlayerMove, otherPlayerMove)) {
+                                counter += 1;
+                                if (counter == 2) {
+                                    board.put(index, " ");
+                                    board.put(subIndex, " ");
+                                    return superSubIndex;
+                                }
+                            }
+                        }
+                        counter = 0;
+                        board.put(subIndex, " ");
+                    }
+                }
+                board.put(index, " ");
+            }
+        }
+
+        // claim random space if all else fails
+        return randomSpace(board);
     }
 
     @Override
@@ -37,21 +97,25 @@ public class SmartAiPlayer extends Player {
     }
 
     private boolean middleSpaceAvailable(HashMap board) {
-        return spaceAvailable(board, middleSpace);
+        if(board.size() % 2 == 1) {
+            return spaceAvailable(board, middleSpace);
+        } else {
+            return false;
+        }
     }
 
-    private boolean canClaimWin(HashMap board, int index, String otherPlayerMove, String thisAiPlayerMove) {
-        return winningMove(board, index, otherPlayerMove, thisAiPlayerMove) != -1;
+    private boolean canClaimWin(HashMap board, int index, String otherPlayerMove, String thisPlayerMove) {
+        return winningMove(board, index, otherPlayerMove, thisPlayerMove) != -1;
     }
 
-    private boolean canBlockLoss(HashMap board, int index, String otherPlayerMove, String thisAiPlayerMove) {
-        return blockLossMove(board, index, otherPlayerMove, thisAiPlayerMove) != -1;
+    private boolean canBlockLoss(HashMap board, int index, String otherPlayerMove, String thisPlayerMove) {
+        return blockLossMove(board, index, otherPlayerMove, thisPlayerMove) != -1;
     }
 
-    private int winningMove(HashMap board, int index, String otherPlayerMove, String thisAiPlayerMove) {
+    private int winningMove(HashMap board, int index, String otherPlayerMove, String thisPlayerMove) {
         if(spaceAvailable(board, index)) {
-            board.put(index, thisAiPlayerMove);
-            if(gameOver(board, otherPlayerMove, thisAiPlayerMove)) {
+            board.put(index, thisPlayerMove);
+            if(gameOver(board, otherPlayerMove, thisPlayerMove)) {
                 board.put(index, " ");
                 return index;
             } else {
@@ -61,10 +125,10 @@ public class SmartAiPlayer extends Player {
         return -1;
     }
 
-    private int blockLossMove(HashMap board, int index, String otherPlayerMove, String thisAiPlayerMove) {
+    private int blockLossMove(HashMap board, int index, String otherPlayerMove, String thisPlayerMove) {
         if(spaceAvailable(board, index)) {
             board.put(index, otherPlayerMove);
-            if(gameOver(board, otherPlayerMove, thisAiPlayerMove)) {
+            if(gameOver(board, otherPlayerMove, thisPlayerMove)) {
                 board.put(index, " ");
                 return index;
             } else {

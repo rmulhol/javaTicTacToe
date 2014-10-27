@@ -8,7 +8,7 @@ public class DumbAiPlayer extends Player {
     String moveSignature;
 
     public DumbAiPlayer(Board boardObject, String moveSignature) {
-        this.board = board;
+        this.board = boardObject;
         this.moveSignature = moveSignature;
     }
 

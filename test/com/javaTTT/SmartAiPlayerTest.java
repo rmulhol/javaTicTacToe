@@ -48,4 +48,15 @@ public class SmartAiPlayerTest {
         assertEquals(4, middleClaim);
     }
 
+    @Test
+    public void testAiClaimsForkOn3x3Board() {
+        for(int i=0; i<9; i++) testBoard.put(i, " ");
+        testBoard.put(1, "X");
+        testBoard.put(2, "O");
+        testBoard.put(4, "O");
+        testBoard.put(6, "X");
+        int forkMove = smartAiPlayer.getMove(testBoard, "X", "O");
+        assertEquals(5, forkMove);
+    }
+
 }
