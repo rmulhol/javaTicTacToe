@@ -16,12 +16,12 @@ public class BoardImpl extends Board {
     int calculateBoardSizeFromSideLength(int boardSideLength) { return boardSideLength * boardSideLength; }
 
     @Override
-    int calculateBoardSizeFromBoard(HashMap board) {
+    int calculateBoardSizeFromBoard(HashMap<Integer, String> board) {
         return board.size();
     }
 
     @Override
-    int calculateBoardSideLengthFromBoard(HashMap board) {
+    int calculateBoardSideLengthFromBoard(HashMap<Integer, String> board) {
         int boardSize = calculateBoardSizeFromBoard(board);
         return (int) sqrt(boardSize);
     }
@@ -39,7 +39,7 @@ public class BoardImpl extends Board {
     HashMap getBoard() { return board; }
 
     @Override
-    void setMove(HashMap board, int move, String player) { board.put(move, player); }
+    void setMove(HashMap<Integer, String> board, int move, String player) { board.put(move, player); }
 
     @Override
     int[][] rows(int boardSideLength) {
@@ -112,33 +112,33 @@ public class BoardImpl extends Board {
     }
 
     @Override
-    boolean moveIsValid(HashMap board, int move) {
+    boolean moveIsValid(HashMap<Integer, String> board, int move) {
         return spaceAvailable(board, move) && spaceInRange(board, move);
     }
 
     @Override
-    boolean spaceAvailable(HashMap board, int move) { return board.get(move) == " "; }
+    boolean spaceAvailable(HashMap<Integer, String> board, int move) { return board.get(move).equals(" "); }
 
     @Override
-    boolean spaceInRange(HashMap board, int move) {
+    boolean spaceInRange(HashMap<Integer, String> board, int move) {
         int boardSize = calculateBoardSizeFromBoard(board);
         return move >= 0 && move <= boardSize - 1;
     }
 
     @Override
-    boolean gameOver(HashMap board, String player1Move, String player2move) {
+    boolean gameOver(HashMap<Integer, String> board, String player1Move, String player2move) {
         return playerWins(board, player1Move) || playerWins(board, player2move) || tieGame(board);
     }
 
     @Override
-    boolean playerWins(HashMap board, String playerMove) {
+    boolean playerWins(HashMap<Integer, String> board, String playerMove) {
         int boardSideLength = calculateBoardSideLengthFromBoard(board);
         int[][] winningCombinations = winningCombinations(boardSideLength);
         boolean gameOver = false;
         for(int[] combination : winningCombinations) {
             int counter = 0;
             for(int space : combination ){
-                if(board.get(space) == playerMove) {
+                if(board.get(space).equals(playerMove)) {
                     counter += 1;
                 }
                 if(counter == boardSideLength) {
@@ -150,7 +150,7 @@ public class BoardImpl extends Board {
     }
 
     @Override
-    boolean tieGame(HashMap board) {
+    boolean tieGame(HashMap<Integer, String> board) {
         int boardSize = calculateBoardSizeFromBoard(board);
         boolean gameOver = true;
         for(int i=0; i<boardSize; i++) {

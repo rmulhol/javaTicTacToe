@@ -26,7 +26,7 @@ public class MessagesImpl extends Messages {
     @Override
     String getPlayerIdentity(int i) {
         return "What will be the identity of player " + i + "?" + "\n" +
-                "Enter 1 for human player, 2 for dumb ai player, or 3 for less dumb ai player.";
+                "Enter 1 for human player, 2 for dumb ai player, 3 for less dumb ai player, or 4 for an unbeatable ai player.";
     }
 
     @Override

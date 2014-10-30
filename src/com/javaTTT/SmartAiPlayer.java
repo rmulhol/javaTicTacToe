@@ -15,7 +15,7 @@ public class SmartAiPlayer extends Player {
     }
 
     @Override
-    int getMove(HashMap board, String otherPlayerMove, String thisAiPlayerMove) {
+    int getMove(HashMap<Integer, String> board, String otherPlayerMove, String thisAiPlayerMove) {
         int boardSize = board.size();
 
         // try to win game
@@ -96,23 +96,19 @@ public class SmartAiPlayer extends Player {
         return moveSignature;
     }
 
-    private boolean middleSpaceAvailable(HashMap board) {
-        if(board.size() % 2 == 1) {
-            return spaceAvailable(board, middleSpace);
-        } else {
-            return false;
-        }
+    private boolean middleSpaceAvailable(HashMap<Integer, String> board) {
+        return board.size() % 2 == 1 && spaceAvailable(board, middleSpace);
     }
 
-    private boolean canClaimWin(HashMap board, int index, String otherPlayerMove, String thisPlayerMove) {
+    private boolean canClaimWin(HashMap<Integer, String > board, int index, String otherPlayerMove, String thisPlayerMove) {
         return winningMove(board, index, otherPlayerMove, thisPlayerMove) != -1;
     }
 
-    private boolean canBlockLoss(HashMap board, int index, String otherPlayerMove, String thisPlayerMove) {
+    private boolean canBlockLoss(HashMap<Integer, String> board, int index, String otherPlayerMove, String thisPlayerMove) {
         return blockLossMove(board, index, otherPlayerMove, thisPlayerMove) != -1;
     }
 
-    private int winningMove(HashMap board, int index, String otherPlayerMove, String thisPlayerMove) {
+    private int winningMove(HashMap<Integer, String> board, int index, String otherPlayerMove, String thisPlayerMove) {
         if(spaceAvailable(board, index)) {
             board.put(index, thisPlayerMove);
             if(gameOver(board, otherPlayerMove, thisPlayerMove)) {
@@ -125,7 +121,7 @@ public class SmartAiPlayer extends Player {
         return -1;
     }
 
-    private int blockLossMove(HashMap board, int index, String otherPlayerMove, String thisPlayerMove) {
+    private int blockLossMove(HashMap<Integer, String> board, int index, String otherPlayerMove, String thisPlayerMove) {
         if(spaceAvailable(board, index)) {
             board.put(index, otherPlayerMove);
             if(gameOver(board, otherPlayerMove, thisPlayerMove)) {
@@ -138,7 +134,7 @@ public class SmartAiPlayer extends Player {
         return -1;
     }
 
-    private int randomSpace(HashMap board) {
+    private int randomSpace(HashMap<Integer, String> board) {
         int boardSize = board.size();
         Random rand = new Random();
         return rand.nextInt(boardSize-1);

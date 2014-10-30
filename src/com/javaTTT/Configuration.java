@@ -35,7 +35,7 @@ public class Configuration {
     private Runner createDefaultGame() {
         Board board = new BoardImpl(3);
         Player humanPlayer = new HumanPlayer(display, "X");
-        Player smartAiPlayer = new SmartAiPlayer(board, "O");
+        Player smartAiPlayer = new UnbeatableAiPlayer(board, "O");
         return new Runner(display, board, humanPlayer, smartAiPlayer);
     }
 
@@ -53,7 +53,7 @@ public class Configuration {
 
     int getPlayerIdentity(int playerNumber) {
         display.getPlayerIdentity(playerNumber);
-        return display.getValidInteger("[1-3]");
+        return display.getValidInteger("[1-4]");
     }
 
     String getPlayerMoveSignature(int playerNumber) {
@@ -73,8 +73,10 @@ public class Configuration {
                 return new HumanPlayer(display, moveSignature);
             case 2:
                 return new DumbAiPlayer(board, moveSignature);
-            default:
+            case 3:
                 return new SmartAiPlayer(board, moveSignature);
+            default:
+                return new UnbeatableAiPlayer(board, moveSignature);
         }
     }
 
