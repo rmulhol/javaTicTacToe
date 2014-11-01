@@ -16,14 +16,18 @@ public class UnbeatableAiPlayer extends Player {
 
         HashMap<Integer, String> originalBoard = new HashMap<Integer, String>(board);
         int[] availableSpaces = availableSpaces(originalBoard);
-        double bestScore = -10.0;
+        double bestScore = -999.0;
         double thisScore;
         int bestMove = -1;
+
+        if(originalBoard.size() == availableSpaces.length) {
+            return 0;
+        }
 
         if(isThisAiPlayer(thisPlayerMove)) {
             for(int availableSpace : availableSpaces) {
                 originalBoard.put(availableSpace, thisPlayerMove);
-                thisScore = minimax(originalBoard, thisPlayerMove, otherPlayerMove, 1);
+                thisScore = minimax(originalBoard, thisPlayerMove, otherPlayerMove, -999, 999, 1);
                 if (thisScore > bestScore) {
                     bestScore = thisScore;
                     bestMove = availableSpace;
@@ -35,7 +39,7 @@ public class UnbeatableAiPlayer extends Player {
         } else {
             for(int availableSpace : availableSpaces) {
                 originalBoard.put(availableSpace, otherPlayerMove);
-                thisScore = minimax(originalBoard, otherPlayerMove, thisPlayerMove,  1);
+                thisScore = minimax(originalBoard, otherPlayerMove, thisPlayerMove, -999.0, 999.0, 1);
                 if (thisScore > bestScore) {
                     bestScore = thisScore;
                     bestMove = availableSpace;
@@ -54,12 +58,10 @@ public class UnbeatableAiPlayer extends Player {
         return moveSignature;
     }
 
-    double minimax(HashMap<Integer, String> board, String otherPlayerMove, String thisPlayerMove, double depth) {
+    double minimax(HashMap<Integer, String> board, String otherPlayerMove, String thisPlayerMove, double alpha, double beta, double depth) {
 
         HashMap<Integer, String> originalBoard = new HashMap<Integer, String>(board);
         double thisScore;
-        double biggestWinner = -10.0;
-        double biggestLoser = 10.0;
 
         if (boardObject.gameOver(originalBoard, otherPlayerMove, thisPlayerMove)) {
 
@@ -78,34 +80,40 @@ public class UnbeatableAiPlayer extends Player {
                 for (int availableSpace : availableSpaces) {
 
                     originalBoard.put(availableSpace, thisPlayerMove);
-                    thisScore = minimax(originalBoard, thisPlayerMove, otherPlayerMove, depth + 1);
-                    if(thisScore > biggestWinner) {
-                        biggestWinner = thisScore;
+                    thisScore = minimax(originalBoard, thisPlayerMove, otherPlayerMove, alpha, beta, depth + 1);
+                    if(thisScore > alpha) {
+                        alpha = thisScore;
                     }
                     originalBoard.put(availableSpace, " ");
+                    if(beta <= alpha) {
+                        break;
+                    }
 
                 }
 
-                return biggestWinner;
+                return alpha;
 
             } else {
 
                 for (int availableSpace : availableSpaces) {
 
                     originalBoard.put(availableSpace, thisPlayerMove);
-                    thisScore = minimax(originalBoard, thisPlayerMove, otherPlayerMove, depth + 1);
-                    if(thisScore < biggestLoser) {
-                        biggestLoser = thisScore;
+                    thisScore = minimax(originalBoard, thisPlayerMove, otherPlayerMove, alpha, beta, depth + 1);
+                    if(thisScore < beta) {
+                        beta = thisScore;
                     }
                     originalBoard.put(availableSpace, " ");
+                    if(beta <= alpha) {
+                        break;
+                    }
                 }
 
-                return biggestLoser;
+                return beta;
             }
         }
     }
 
-    double scoreBoard(HashMap board, String otherPlayerMove, String thisPlayerMove) {
+    double scoreBoard(HashMap<Integer, String > board, String otherPlayerMove, String thisPlayerMove) {
         if(boardObject.playerWins(board, thisPlayerMove)) {
             return 10.0;
         } else if(boardObject.playerWins(board, otherPlayerMove)) {
@@ -119,7 +127,7 @@ public class UnbeatableAiPlayer extends Player {
         return move.equals(moveSignature);
     }
 
-    int[] availableSpaces(HashMap board) {
+    int[] availableSpaces(HashMap<Integer, String> board) {
         int emptySpacesCounter = 0;
         for(int i=0; i<board.size(); i++) {
             if(boardObject.spaceAvailable(board, i)) {
