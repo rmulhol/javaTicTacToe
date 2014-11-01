@@ -140,9 +140,9 @@ public class SmartAiPlayer extends Player {
         return rand.nextInt(boardSize-1);
     }
 
-    private boolean spaceAvailable(HashMap board, int index) { return boardObject.spaceAvailable(board, index); }
+    private boolean spaceAvailable(HashMap<Integer, String> board, int index) { return boardObject.spaceAvailable(board, index); }
 
-    private boolean gameOver(HashMap board, String otherPlayerMove, String thisAiPlayerMove) {
+    private boolean gameOver(HashMap<Integer, String> board, String otherPlayerMove, String thisAiPlayerMove) {
         return boardObject.gameOver(board, otherPlayerMove, thisAiPlayerMove);
     }
 

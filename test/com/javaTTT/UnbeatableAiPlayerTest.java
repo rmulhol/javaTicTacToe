@@ -29,6 +29,22 @@ public class UnbeatableAiPlayerTest {
     }
 
     @Test
+    public void testClaimsWinnerOnBigBoard() {
+        HashMap<Integer, String> bigTestBoard = new HashMap<Integer, String>();
+        for(int i=0; i<16; i++) {
+            bigTestBoard.put(i, " ");
+        }
+        bigTestBoard.put(0, "O");
+        bigTestBoard.put(5, "O");
+        bigTestBoard.put(10, "O");
+        bigTestBoard.put(1, "X");
+        bigTestBoard.put(2, "X");
+        bigTestBoard.put(3, "X");
+        int winningMove = testPlayer.getMove(bigTestBoard, "X", "O");
+        assertEquals(15, winningMove);
+    }
+
+    @Test
     public void testBlocksLoss() {
         clearBoard();
         testBoard.put(3, "X");
@@ -41,7 +57,7 @@ public class UnbeatableAiPlayerTest {
     // This test is passing, and therefore lying
     public void testBlocksLossAtIndex6() {
         clearBoard();
-        testBoard.put(0, "0");
+        testBoard.put(0, "O");
         testBoard.put(4, "X");
         testBoard.put(1, "O");
         testBoard.put(2, "X");
