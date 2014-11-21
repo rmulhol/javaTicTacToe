@@ -113,7 +113,7 @@ public class BoardImpl extends Board {
 
     @Override
     boolean moveIsValid(HashMap<Integer, String> board, int move) {
-        return spaceAvailable(board, move) && spaceInRange(board, move);
+        return spaceInRange(board, move) && spaceAvailable(board, move);
     }
 
     @Override
