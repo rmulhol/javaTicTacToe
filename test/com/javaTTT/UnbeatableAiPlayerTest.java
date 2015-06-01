@@ -54,7 +54,6 @@ public class UnbeatableAiPlayerTest {
     }
 
     @Test
-    // This test is passing, and therefore lying
     public void testBlocksLossAtIndex6() {
         clearBoard();
         testBoard.put(0, "O");
